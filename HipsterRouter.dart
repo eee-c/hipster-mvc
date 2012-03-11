@@ -2,6 +2,8 @@
 
 #import("dart:html");
 
+#import("HipsterHistory.dart");
+
 class HipsterRouter {
   RouterEvents on;
 
