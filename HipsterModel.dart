@@ -1,7 +1,6 @@
 #library('Base class for Models');
 
 #import('dart:html');
-#import('dart:htmlimpl');
 #import('dart:json');
 
 #import('HipsterSync.dart');

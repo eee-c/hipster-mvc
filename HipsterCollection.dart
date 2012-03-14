@@ -1,7 +1,6 @@
 #library('Base class for Collections');
 
 #import('dart:html');
-#import('dart:htmlimpl');
 #import('dart:json');
 
 #import('HipsterModel.dart');
