@@ -28,8 +28,18 @@ class HipsterSync {
     }
   }
 
+  static Map _methodMap = const {
+    'create': 'post',
+    'update': 'put',
+    'read': 'get'
+  };
+
   // default sync behavior
-  static Future _defaultSync(method, model) {
+  static Future _defaultSync(_method, model) {
+    String method = _method.toLowerCase(),
+           verb = _methodMap.containsKey(method) ?
+                    _methodMap[method] : method;
+
     var request = new XMLHttpRequest(),
         completer = new Completer();
 
@@ -49,10 +59,10 @@ class HipsterSync {
         }
       });
 
-    request.open(method, model.url, true);
+    request.open(verb, model.url, true);
 
     // POST and PUT HTTP request bodies if necessary
-    if (method == 'post' || method == 'put') {
+    if (verb == 'post' || verb == 'put') {
       request.setRequestHeader('Content-type', 'application/json');
       request.send(JSON.stringify(model.attributes));
     }

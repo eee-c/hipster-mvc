@@ -28,10 +28,11 @@ class HipsterModel implements Hashable {
 
   bool isSaved() => attributes['id'] == null;
 
+  // TODO: update
   Future<HipsterModel> save() {
     Completer completer = new Completer();
 
-    Future after_call = HipsterSync.call('post', this);
+    Future after_call = HipsterSync.call('create', this);
 
     after_call.
       then((attrs) {

@@ -37,7 +37,7 @@ class HipsterCollection implements Collection {
 
   fetch() {
     HipsterSync.
-      call('get', this).
+      call('read', this).
       then((list) {
         list.forEach((attrs) {
           var new_model = modelMaker(attrs);
