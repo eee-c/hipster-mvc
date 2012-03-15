@@ -24,6 +24,7 @@ class HipsterSync {
       return _defaultSync(method, model);
     }
     else {
+      // TODO check for null future returned from _injected_sync
       return _injected_sync(method, model);
     }
   }
@@ -37,8 +38,8 @@ class HipsterSync {
   // default sync behavior
   static Future _defaultSync(_method, model) {
     String method = _method.toLowerCase(),
-           verb = _methodMap.containsKey(method) ?
-                    _methodMap[method] : method;
+           verb   = _methodMap.containsKey(method) ?
+                      _methodMap[method] : method;
 
     var request = new XMLHttpRequest(),
         completer = new Completer();
