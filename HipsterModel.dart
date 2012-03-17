@@ -20,13 +20,15 @@ class HipsterModel implements Hashable {
 
   operator [](attr) => attributes[attr];
 
+  get id() => attributes['id'];
+
   get url() => isSaved() ?
-      urlRoot : "$urlRoot/${attributes['id']}";
+      urlRoot : "$urlRoot/$id";
 
   get urlRoot() => (collection == null) ?
     "" : collection.url;
 
-  bool isSaved() => attributes['id'] == null;
+  bool isSaved() => id == null;
 
   // TODO: update
   Future<HipsterModel> save() {
