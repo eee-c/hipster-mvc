@@ -44,6 +44,8 @@ class HipsterView {
     });
   }
 
+  CSSStyleDeclaration get style() => el.style;
+
   // noSuchMethod(name, args) {
   //   print("[noSuchMethod] $name");
   // }
