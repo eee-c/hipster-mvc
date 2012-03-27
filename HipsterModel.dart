@@ -1,4 +1,4 @@
-#library('Base class for Models');
+#library('hipster_model');
 
 #import('dart:html');
 #import('dart:json');

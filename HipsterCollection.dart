@@ -1,4 +1,4 @@
-#library('Base class for Collections');
+#library('hipster_collection');
 
 #import('dart:html');
 #import('dart:json');

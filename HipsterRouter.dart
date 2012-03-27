@@ -1,4 +1,4 @@
-#library('Router for MVC pages.');
+#library('hipster_router');
 
 #import("dart:html");
 

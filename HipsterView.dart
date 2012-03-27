@@ -1,4 +1,4 @@
-#library('Base class for Views');
+#library('hipster_view');
 
 #import('dart:html');
 

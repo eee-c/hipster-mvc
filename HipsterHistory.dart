@@ -1,4 +1,4 @@
-#library('Manage pushState, usually through HipsterRouter.');
+#library('hipster_history');
 
 #import('dart:html');
 

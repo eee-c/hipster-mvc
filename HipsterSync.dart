@@ -1,4 +1,4 @@
-#library('Sync layer for HipsterMVC');
+#library('hipster_sync');
 
 #import('dart:html');
 #import('dart:json');
