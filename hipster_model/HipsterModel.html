@@ -1,0 +1,217 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Library hipster_model / Class HipsterModel</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css" />
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico" />
+        <script src="../client-live-nav.js"></script>
+        
+        </head>
+        <body data-library="hipster_model" data-type="HipsterModel">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../hipster_model.html">hipster_model</a> &rsaquo; <a href="../hipster_model/HipsterModel.html">HipsterModel</a></div>
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2>Class
+            <strong>HipsterModel</strong></h2>
+        
+<div class="doc">
+
+</div>
+<h3>Implements</h3>
+<p>
+<span class="type-box"><span class="icon-interface"></span><a href="../dart_core/Hashable.html">Hashable</a></span></p>
+<h3>Constructors</h3>
+<div class="method"><h4 id="HipsterModel">
+<span class="show-code">Code</span>
+new <strong>HipsterModel</strong>(attributes, [collection]) <a class="anchor-link" href="#HipsterModel"
+              title="Permalink to HipsterModel.HipsterModel">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+HipsterModel(this.attributes, [this.collection]) {
+  on = new ModelEvents();
+}
+</pre>
+</div>
+</div>
+<h3>Static Methods</h3>
+<div class="method"><h4 id="hash">
+<span class="show-code">Code</span>
+<a href="../dart_core/String.html">String</a> <strong>hash</strong>() <a class="anchor-link" href="#hash"
+              title="Permalink to HipsterModel.hash">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+static String hash() {
+  return (new Date.now()).value.hashCode().toRadixString(16);
+}
+</pre>
+</div>
+</div>
+<h3>Methods</h3>
+<div class="method"><h4 id=":index">
+<span class="show-code">Code</span>
+<strong>operator []</strong>(attr) <a class="anchor-link" href="#:index"
+              title="Permalink to HipsterModel.operator []">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+operator [](attr) =&gt; attributes[attr];
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="delete">
+<span class="show-code">Code</span>
+<a href="../dart_core/Future.html">Future</a> <strong>delete</strong>() <a class="anchor-link" href="#delete"
+              title="Permalink to HipsterModel.delete">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+Future&lt;HipsterModel&gt; delete() {
+  Completer completer = new Completer();
+
+  HipsterSync.
+    call('delete', this).
+    then((attrs) {
+      var event = new ModelEvent('delete', this);
+      on.delete.dispatch(event);
+
+      completer.complete(this);
+    });
+
+  return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="get:id">
+<span class="show-code">Code</span>
+<strong>get id</strong>() <a class="anchor-link" href="#get:id"
+              title="Permalink to HipsterModel.get id">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+get id() =&gt; attributes['id'];
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="isSaved">
+<span class="show-code">Code</span>
+<a href="../dart_core/bool.html">bool</a> <strong>isSaved</strong>() <a class="anchor-link" href="#isSaved"
+              title="Permalink to HipsterModel.isSaved">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+bool isSaved() =&gt; id == null;
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="save">
+<span class="show-code">Code</span>
+<a href="../dart_core/Future.html">Future</a> <strong>save</strong>() <a class="anchor-link" href="#save"
+              title="Permalink to HipsterModel.save">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+Future&lt;HipsterModel&gt; save() {
+  Completer completer = new Completer();
+
+  Future after_call = HipsterSync.call('create', this);
+
+  after_call.
+    then((attrs) {
+      this.attributes = attrs;
+      on.load.dispatch(new ModelEvent('save', this));
+      completer.complete(this);
+    });
+
+  after_call.
+    handleException((e) {
+      completer.completeException(e);
+      return true;
+    });
+
+  return completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="get:url">
+<span class="show-code">Code</span>
+<strong>get url</strong>() <a class="anchor-link" href="#get:url"
+              title="Permalink to HipsterModel.get url">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+get url() =&gt; isSaved() ?
+    urlRoot : "$urlRoot/$id";
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="get:urlRoot">
+<span class="show-code">Code</span>
+<strong>get urlRoot</strong>() <a class="anchor-link" href="#get:urlRoot"
+              title="Permalink to HipsterModel.get urlRoot">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+get urlRoot() =&gt; (collection == null) ?
+  "" : collection.url;
+</pre>
+</div>
+</div>
+<h3>Fields</h3>
+<div class="field"><h4 id="attributes">
+<span class="show-code">Code</span>
+<a href="../dart_core/Map.html">Map</a>         <strong>attributes</strong> <a class="anchor-link"
+            href="#attributes"
+            title="Permalink to HipsterModel.attributes">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+Map attributes;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="collection">
+<span class="show-code">Code</span>
+<a href="../dart_core/Collection.html">Collection</a>         <strong>collection</strong> <a class="anchor-link"
+            href="#collection"
+            title="Permalink to HipsterModel.collection">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+Collection collection;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="on">
+<span class="show-code">Code</span>
+<a href="../hipster_model/ModelEvents.html">ModelEvents</a>         <strong>on</strong> <a class="anchor-link"
+            href="#on"
+            title="Permalink to HipsterModel.on">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+ModelEvents on;
+</pre>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer"></div>
+        </body></html>
+        

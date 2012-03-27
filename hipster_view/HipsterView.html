@@ -1,0 +1,146 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Library hipster_view / Class HipsterView</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css" />
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico" />
+        <script src="../client-live-nav.js"></script>
+        
+        </head>
+        <body data-library="hipster_view" data-type="HipsterView">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../hipster_view.html">hipster_view</a> &rsaquo; <a href="../hipster_view/HipsterView.html">HipsterView</a></div>
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2>Class
+            <strong>HipsterView</strong></h2>
+        
+<div class="doc">
+
+</div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="HipsterView">
+<span class="show-code">Code</span>
+new <strong>HipsterView</strong>([el, model, collection]) <a class="anchor-link" href="#HipsterView"
+              title="Permalink to HipsterView.HipsterView">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+HipsterView([el, this.model, this.collection]) {
+  if (el != null) {
+    this.el = (el is Element) ? el : document.query(el);
+  }
+
+  this.post_initialize();
+
+  // TODO define an ensureElement to create a default, anonymous element
+  assert(this.el != null);
+}
+</pre>
+</div>
+</div>
+<h3>Methods</h3>
+<div class="method"><h4 id="attachHandler">
+<span class="show-code">Code</span>
+<strong>attachHandler</strong>(parent, event_selector, callback) <a class="anchor-link" href="#attachHandler"
+              title="Permalink to HipsterView.attachHandler">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+attachHandler(parent, event_selector, callback) {
+  var index = event_selector.indexOf(' ')
+    , event_type = event_selector.substring(0,index)
+    , selector = event_selector.substring(index+1);
+
+  parent.on[event_type].add((event) {
+    var found = false;
+    parent.queryAll(selector).forEach((el) {
+      if (el == event.target) found = true;
+    });
+    if (!found) return;
+
+    print(event.target.parent.id);
+    callback(event);
+
+    event.preventDefault();
+  });
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="post_initialize">
+<span class="show-code">Code</span>
+<a href="../dart_core/void.html">void</a> <strong>post_initialize</strong>() <a class="anchor-link" href="#post_initialize"
+              title="Permalink to HipsterView.post_initialize">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+void post_initialize() { }
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="get:style">
+<span class="show-code">Code</span>
+<a href="../html/CSSStyleDeclaration.html">CSSStyleDeclaration</a> <strong>get style</strong>() <a class="anchor-link" href="#get:style"
+              title="Permalink to HipsterView.get style">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+CSSStyleDeclaration get style() =&gt; el.style;
+</pre>
+</div>
+</div>
+<h3>Fields</h3>
+<div class="field"><h4 id="collection">
+<span class="show-code">Code</span>
+<a href="../hipster_collection/HipsterCollection.html">HipsterCollection</a>         <strong>collection</strong> <a class="anchor-link"
+            href="#collection"
+            title="Permalink to HipsterView.collection">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+HipsterCollection collection;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="el">
+<span class="show-code">Code</span>
+<a href="../html/Element.html">Element</a>         <strong>el</strong> <a class="anchor-link"
+            href="#el"
+            title="Permalink to HipsterView.el">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+Element el;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="model">
+<span class="show-code">Code</span>
+<a href="../hipster_model/HipsterModel.html">HipsterModel</a>         <strong>model</strong> <a class="anchor-link"
+            href="#model"
+            title="Permalink to HipsterView.model">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+HipsterModel model;
+</pre>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer"></div>
+        </body></html>
+        

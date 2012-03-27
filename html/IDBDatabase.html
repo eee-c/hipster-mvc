@@ -1,0 +1,202 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Library html / Interface IDBDatabase</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css" />
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico" />
+        <script src="../client-live-nav.js"></script>
+        
+        </head>
+        <body data-library="html" data-type="IDBDatabase">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../html.html">html</a> &rsaquo; <a href="../html/IDBDatabase.html">IDBDatabase</a></div>
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2>Interface
+            <strong>IDBDatabase</strong></h2>
+        
+<div class="doc">
+
+</div>
+<h3>Methods</h3>
+<div class="method"><h4 id="addEventListener">
+<span class="show-code">Code</span>
+<a href="../dart_core/void.html">void</a> <strong>addEventListener</strong>(<a href="../dart_core/String.html">String</a> type, <a href="../dart_core/void.html">void</a> listener(<a href="../html/Event.html">Event</a> event), [<a href="../dart_core/bool.html">bool</a> useCapture]) <a class="anchor-link" href="#addEventListener"
+              title="Permalink to IDBDatabase.addEventListener">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+void addEventListener(String type, EventListener listener, [bool useCapture]);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="close">
+<span class="show-code">Code</span>
+<a href="../dart_core/void.html">void</a> <strong>close</strong>() <a class="anchor-link" href="#close"
+              title="Permalink to IDBDatabase.close">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+void close();
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="createObjectStore">
+<span class="show-code">Code</span>
+<a href="../html/IDBObjectStore.html">IDBObjectStore</a> <strong>createObjectStore</strong>(<a href="../dart_core/String.html">String</a> name) <a class="anchor-link" href="#createObjectStore"
+              title="Permalink to IDBDatabase.createObjectStore">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+IDBObjectStore createObjectStore(String name);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="deleteObjectStore">
+<span class="show-code">Code</span>
+<a href="../dart_core/void.html">void</a> <strong>deleteObjectStore</strong>(<a href="../dart_core/String.html">String</a> name) <a class="anchor-link" href="#deleteObjectStore"
+              title="Permalink to IDBDatabase.deleteObjectStore">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+void deleteObjectStore(String name);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="dispatchEvent">
+<span class="show-code">Code</span>
+<a href="../dart_core/bool.html">bool</a> <strong>dispatchEvent</strong>(<a href="../html/Event.html">Event</a> evt) <a class="anchor-link" href="#dispatchEvent"
+              title="Permalink to IDBDatabase.dispatchEvent">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+bool dispatchEvent(Event evt);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="removeEventListener">
+<span class="show-code">Code</span>
+<a href="../dart_core/void.html">void</a> <strong>removeEventListener</strong>(<a href="../dart_core/String.html">String</a> type, <a href="../dart_core/void.html">void</a> listener(<a href="../html/Event.html">Event</a> event), [<a href="../dart_core/bool.html">bool</a> useCapture]) <a class="anchor-link" href="#removeEventListener"
+              title="Permalink to IDBDatabase.removeEventListener">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+void removeEventListener(String type, EventListener listener, [bool useCapture]);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setVersion">
+<span class="show-code">Code</span>
+<a href="../html/IDBVersionChangeRequest.html">IDBVersionChangeRequest</a> <strong>setVersion</strong>(<a href="../dart_core/String.html">String</a> version) <a class="anchor-link" href="#setVersion"
+              title="Permalink to IDBDatabase.setVersion">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+IDBVersionChangeRequest setVersion(String version);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="transaction">
+<span class="show-code">Code</span>
+<a href="../html/IDBTransaction.html">IDBTransaction</a> <strong>transaction</strong>(storeName_OR_storeNames, [<a href="../dart_core/int.html">int</a> mode]) <a class="anchor-link" href="#transaction"
+              title="Permalink to IDBDatabase.transaction">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+IDBTransaction transaction(var storeName_OR_storeNames, [int mode]);
+</pre>
+</div>
+</div>
+<h3>Fields</h3>
+<div class="field"><h4 id="name">
+<span class="show-code">Code</span>
+final <a href="../dart_core/String.html">String</a>         <strong>name</strong> <a class="anchor-link"
+            href="#name"
+            title="Permalink to IDBDatabase.name">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+final String name;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="objectStoreNames">
+<span class="show-code">Code</span>
+final <a href="../dart_core/List.html">List</a>         <strong>objectStoreNames</strong> <a class="anchor-link"
+            href="#objectStoreNames"
+            title="Permalink to IDBDatabase.objectStoreNames">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+final List&lt;String&gt; objectStoreNames;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onabort">
+<span class="show-code">Code</span>
+<a href="../html/EventListener.html">EventListener</a>         <strong>onabort</strong> <a class="anchor-link"
+            href="#onabort"
+            title="Permalink to IDBDatabase.onabort">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+EventListener onabort;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onerror">
+<span class="show-code">Code</span>
+<a href="../html/EventListener.html">EventListener</a>         <strong>onerror</strong> <a class="anchor-link"
+            href="#onerror"
+            title="Permalink to IDBDatabase.onerror">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+EventListener onerror;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="onversionchange">
+<span class="show-code">Code</span>
+<a href="../html/EventListener.html">EventListener</a>         <strong>onversionchange</strong> <a class="anchor-link"
+            href="#onversionchange"
+            title="Permalink to IDBDatabase.onversionchange">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+EventListener onversionchange;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="version">
+<span class="show-code">Code</span>
+final <a href="../dart_core/String.html">String</a>         <strong>version</strong> <a class="anchor-link"
+            href="#version"
+            title="Permalink to IDBDatabase.version">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+final String version;
+</pre>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer"></div>
+        </body></html>
+        

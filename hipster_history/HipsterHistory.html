@@ -1,0 +1,75 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Library hipster_history / Class HipsterHistory</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css" />
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico" />
+        <script src="../client-live-nav.js"></script>
+        
+        </head>
+        <body data-library="hipster_history" data-type="HipsterHistory">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../hipster_history.html">hipster_history</a> &rsaquo; <a href="../hipster_history/HipsterHistory.html">HipsterHistory</a></div>
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2>Class
+            <strong>HipsterHistory</strong></h2>
+        
+<div class="doc">
+
+</div>
+<h3>Static Methods</h3>
+<div class="method"><h4 id="route">
+<span class="show-code">Code</span>
+<strong>route</strong>(route, fn) <a class="anchor-link" href="#route"
+              title="Permalink to HipsterHistory.route">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+static route(route, fn) {
+  routes.add([route, fn]);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="get:routes">
+<span class="show-code">Code</span>
+<strong>get routes</strong>() <a class="anchor-link" href="#get:routes"
+              title="Permalink to HipsterHistory.get routes">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+static get routes() {
+  if (_routes == null) _routes = [];
+  return _routes;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="startHistory">
+<span class="show-code">Code</span>
+<strong>startHistory</strong>() <a class="anchor-link" href="#startHistory"
+              title="Permalink to HipsterHistory.startHistory">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+static startHistory() {
+  window.on.popState.add(_checkUrl);
+}
+</pre>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer"></div>
+        </body></html>
+        

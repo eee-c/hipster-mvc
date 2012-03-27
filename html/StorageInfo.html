@@ -1,0 +1,84 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Library html / Interface StorageInfo</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css" />
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico" />
+        <script src="../client-live-nav.js"></script>
+        
+        </head>
+        <body data-library="html" data-type="StorageInfo">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../html.html">html</a> &rsaquo; <a href="../html/StorageInfo.html">StorageInfo</a></div>
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2>Interface
+            <strong>StorageInfo</strong></h2>
+        
+<div class="doc">
+
+</div>
+<h3>Static Fields</h3>
+<div class="field"><h4 id="PERSISTENT">
+<span class="show-code">Code</span>
+final <a href="../dart_core/int.html">int</a>         <strong>PERSISTENT</strong> <a class="anchor-link"
+            href="#PERSISTENT"
+            title="Permalink to StorageInfo.PERSISTENT">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+static final int PERSISTENT = 1;
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="TEMPORARY">
+<span class="show-code">Code</span>
+final <a href="../dart_core/int.html">int</a>         <strong>TEMPORARY</strong> <a class="anchor-link"
+            href="#TEMPORARY"
+            title="Permalink to StorageInfo.TEMPORARY">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+static final int TEMPORARY = 0;
+</pre>
+</div>
+</div>
+<h3>Methods</h3>
+<div class="method"><h4 id="queryUsageAndQuota">
+<span class="show-code">Code</span>
+<a href="../dart_core/void.html">void</a> <strong>queryUsageAndQuota</strong>(<a href="../dart_core/int.html">int</a> storageType, [<a href="../dart_core/bool.html">bool</a> usageCallback(<a href="../dart_core/int.html">int</a> currentUsageInBytes, <a href="../dart_core/int.html">int</a> currentQuotaInBytes), <a href="../dart_core/bool.html">bool</a> errorCallback(<a href="../html/DOMException.html">DOMException</a> error)]) <a class="anchor-link" href="#queryUsageAndQuota"
+              title="Permalink to StorageInfo.queryUsageAndQuota">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+void queryUsageAndQuota(int storageType, [StorageInfoUsageCallback usageCallback, StorageInfoErrorCallback errorCallback]);
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="requestQuota">
+<span class="show-code">Code</span>
+<a href="../dart_core/void.html">void</a> <strong>requestQuota</strong>(<a href="../dart_core/int.html">int</a> storageType, <a href="../dart_core/int.html">int</a> newQuotaInBytes, [<a href="../dart_core/bool.html">bool</a> quotaCallback(<a href="../dart_core/int.html">int</a> grantedQuotaInBytes), <a href="../dart_core/bool.html">bool</a> errorCallback(<a href="../html/DOMException.html">DOMException</a> error)]) <a class="anchor-link" href="#requestQuota"
+              title="Permalink to StorageInfo.requestQuota">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+void requestQuota(int storageType, int newQuotaInBytes, [StorageInfoQuotaCallback quotaCallback, StorageInfoErrorCallback errorCallback]);
+</pre>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer"></div>
+        </body></html>
+        

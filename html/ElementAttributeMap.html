@@ -1,0 +1,221 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Library html / Class ElementAttributeMap</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css" />
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico" />
+        <script src="../client-live-nav.js"></script>
+        
+        </head>
+        <body data-library="html" data-type="ElementAttributeMap">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../html.html">html</a> &rsaquo; <a href="../html/ElementAttributeMap.html">ElementAttributeMap</a></div>
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2>Class
+            <strong>ElementAttributeMap</strong></h2>
+        
+<div class="doc">
+
+</div>
+<h3>Implements</h3>
+<p>
+<span class="type-box"><span class="icon-interface"></span><a href="../dart_core/Map.html">Map<dart:core.String, dart:core.String>&lt;K, V&gt;</a></span></p>
+<h3>Methods</h3>
+<div class="method"><h4 id=":index">
+<span class="show-code">Code</span>
+<a href="../dart_core/String.html">String</a> <strong>operator []</strong>(<a href="../dart_core/String.html">String</a> key) <a class="anchor-link" href="#:index"
+              title="Permalink to ElementAttributeMap.operator []">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+String operator [](String key) {
+  return _element._getAttribute(key);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id=":setindex">
+<span class="show-code">Code</span>
+<a href="../dart_core/void.html">void</a> <strong>operator []=</strong>(<a href="../dart_core/String.html">String</a> key, <a href="../dart_core/String.html">String</a> value) <a class="anchor-link" href="#:setindex"
+              title="Permalink to ElementAttributeMap.operator []=">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+void operator []=(String key, String value) {
+  _element._setAttribute(key, value);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="clear">
+<span class="show-code">Code</span>
+<a href="../dart_core/void.html">void</a> <strong>clear</strong>() <a class="anchor-link" href="#clear"
+              title="Permalink to ElementAttributeMap.clear">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+void clear() {
+  final attributes = _element._attributes;
+  for (int i = attributes.length - 1; i &gt;= 0; i--) {
+    remove(attributes[i].name);
+  }
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="containsKey">
+<span class="show-code">Code</span>
+<a href="../dart_core/bool.html">bool</a> <strong>containsKey</strong>(<a href="../dart_core/String.html">String</a> key) <a class="anchor-link" href="#containsKey"
+              title="Permalink to ElementAttributeMap.containsKey">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+bool containsKey(String key) {
+  return _element._hasAttribute(key);
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="containsValue">
+<span class="show-code">Code</span>
+<a href="../dart_core/bool.html">bool</a> <strong>containsValue</strong>(<a href="../dart_core/String.html">String</a> value) <a class="anchor-link" href="#containsValue"
+              title="Permalink to ElementAttributeMap.containsValue">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+bool containsValue(String value) {
+  final attributes = _element._attributes;
+  for (int i = 0, len = attributes.length; i &lt; len; i++) {
+    if(value == attributes[i].value) {
+      return true;
+    }
+  }
+  return false;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="forEach">
+<span class="show-code">Code</span>
+<a href="../dart_core/void.html">void</a> <strong>forEach</strong>(<a href="../dart_core/void.html">void</a> f(<a href="../dart_core/String.html">String</a> key, <a href="../dart_core/String.html">String</a> value)) <a class="anchor-link" href="#forEach"
+              title="Permalink to ElementAttributeMap.forEach">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+void forEach(void f(String key, String value)) {
+  final attributes = _element._attributes;
+  for (int i = 0, len = attributes.length; i &lt; len; i++) {
+    final item = attributes[i];
+    f(item.name, item.value);
+  }
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getKeys">
+<span class="show-code">Code</span>
+<a href="../dart_core/Collection.html">Collection</a> <strong>getKeys</strong>() <a class="anchor-link" href="#getKeys"
+              title="Permalink to ElementAttributeMap.getKeys">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+Collection&lt;String&gt; getKeys() {
+  // TODO(jacobr): generate a lazy collection instead.
+  final attributes = _element._attributes;
+  final keys = new List&lt;String&gt;(attributes.length);
+  for (int i = 0, len = attributes.length; i &lt; len; i++) {
+    keys[i] = attributes[i].name;
+  }
+  return keys;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="getValues">
+<span class="show-code">Code</span>
+<a href="../dart_core/Collection.html">Collection</a> <strong>getValues</strong>() <a class="anchor-link" href="#getValues"
+              title="Permalink to ElementAttributeMap.getValues">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+Collection&lt;String&gt; getValues() {
+  // TODO(jacobr): generate a lazy collection instead.
+  final attributes = _element._attributes;
+  final values = new List&lt;String&gt;(attributes.length);
+  for (int i = 0, len = attributes.length; i &lt; len; i++) {
+    values[i] = attributes[i].value;
+  }
+  return values;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="isEmpty">
+<span class="show-code">Code</span>
+<a href="../dart_core/bool.html">bool</a> <strong>isEmpty</strong>() <a class="anchor-link" href="#isEmpty"
+              title="Permalink to ElementAttributeMap.isEmpty">#</a></h4>
+<div class="doc">
+<p>Returns true if there is no {key, value} pair in the map.</p>
+<pre class="source">
+bool isEmpty() {
+  return length == 0;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="get:length">
+<span class="show-code">Code</span>
+<a href="../dart_core/int.html">int</a> <strong>get length</strong>() <a class="anchor-link" href="#get:length"
+              title="Permalink to ElementAttributeMap.get length">#</a></h4>
+<div class="doc">
+<p>The number of {key, value} pairs in the map.</p>
+<pre class="source">
+int get length() {
+  return _element._attributes.length;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="putIfAbsent">
+<span class="show-code">Code</span>
+<a href="../dart_core/String.html">String</a> <strong>putIfAbsent</strong>(<a href="../dart_core/String.html">String</a> key, <a href="../dart_core/String.html">String</a> ifAbsent()) <a class="anchor-link" href="#putIfAbsent"
+              title="Permalink to ElementAttributeMap.putIfAbsent">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+String putIfAbsent(String key, String ifAbsent()) {
+  if (!containsKey(key)) {
+    this[key] = ifAbsent();
+  }
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="remove">
+<span class="show-code">Code</span>
+<a href="../dart_core/String.html">String</a> <strong>remove</strong>(<a href="../dart_core/String.html">String</a> key) <a class="anchor-link" href="#remove"
+              title="Permalink to ElementAttributeMap.remove">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+String remove(String key) {
+  _element._removeAttribute(key);
+}
+</pre>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer"></div>
+        </body></html>
+        

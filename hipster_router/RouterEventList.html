@@ -1,0 +1,94 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Library hipster_router / Class RouterEventList</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css" />
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico" />
+        <script src="../client-live-nav.js"></script>
+        
+        </head>
+        <body data-library="hipster_router" data-type="RouterEventList">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../hipster_router.html">hipster_router</a> &rsaquo; <a href="../hipster_router/RouterEventList.html">RouterEventList</a></div>
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2>Class
+            <strong>RouterEventList</strong></h2>
+        
+<div class="doc">
+
+</div>
+<h3>Implements</h3>
+<p>
+<span class="type-box"><span class="icon-interface"></span><a href="../html/EventListenerList.html">EventListenerList</a></span></p>
+<h3>Constructors</h3>
+<div class="method"><h4 id="RouterEventList">
+<span class="show-code">Code</span>
+new <strong>RouterEventList</strong>() <a class="anchor-link" href="#RouterEventList"
+              title="Permalink to RouterEventList.RouterEventList">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+RouterEventList() {
+  listeners = [];
+}
+</pre>
+</div>
+</div>
+<h3>Methods</h3>
+<div class="method"><h4 id="add">
+<span class="show-code">Code</span>
+<a href="../hipster_router/RouterEventList.html">RouterEventList</a> <strong>add</strong>(fn) <a class="anchor-link" href="#add"
+              title="Permalink to RouterEventList.add">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+RouterEventList add(fn) {
+  listeners.add(fn);
+  return this;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="dispatch">
+<span class="show-code">Code</span>
+<a href="../dart_core/bool.html">bool</a> <strong>dispatch</strong>(<a href="../hipster_router/RouterEvent.html">RouterEvent</a> event) <a class="anchor-link" href="#dispatch"
+              title="Permalink to RouterEventList.dispatch">#</a></h4>
+<div class="doc">
+
+<pre class="source">
+bool dispatch(RouterEvent event) {
+  listeners.forEach((fn) {fn(event);});
+  return true;
+}
+</pre>
+</div>
+</div>
+<h3>Fields</h3>
+<div class="field"><h4 id="listeners">
+<span class="show-code">Code</span>
+<a href="../dart_core/List.html">List</a>         <strong>listeners</strong> <a class="anchor-link"
+            href="#listeners"
+            title="Permalink to RouterEventList.listeners">#</a>
+        </h4>
+        <div class="doc">
+
+<pre class="source">
+List listeners;
+</pre>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer"></div>
+        </body></html>
+        
