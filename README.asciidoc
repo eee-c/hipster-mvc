@@ -1,5 +1,8 @@
 = Hipster MVC
 
+*NEW* http://eee-c.github.com/hipster-mvc[API Documentation].
+
+
 This is a very, very alpha release of a Dart-based MVC framework. It is not ready for real use yet.
 
 Details and usage examples to come later.
