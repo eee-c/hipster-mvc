@@ -32,7 +32,25 @@
 new <strong>HipsterRouter</strong>() <a class="anchor-link" href="#HipsterRouter"
               title="Permalink to HipsterRouter.HipsterRouter">#</a></h4>
 <div class="doc">
-
+<p>Application routers must subclass <a class="crossref" href="../hipster_router/HipsterRouter.html">HipsterRouter</a>, definining at least the
+<a class="crossref" href="../hipster_router/HipsterRouter.html#get:routes">routes</a> getter:</p>
+<pre><code>class MyRouter extends HipsterRouter {
+  List get routes() =&gt;
+    [
+      ['page/:num', pageNum, 'page']
+    ];
+  //
+  pageNum(num) {
+    var el = document.query('body');
+     el.innerHTML = _pageNumTemplate(num);
+  }
+}
+</code></pre>
+<p>Start the router by creating an instance of the routing class and by
+telling <code>HipsterHistory</code> to start listening for pushState events:</p>
+<pre><code>HipsterRouter app = new MyRouter();
+HipsterHistory.startHistory();
+</code></pre>
 <pre class="source">
 HipsterRouter() {
   on = new RouterEvents();
@@ -47,7 +65,7 @@ HipsterRouter() {
 <a href="http://api.dartlang.org/dart_core/List.html" ref="external">List</a> <strong>get routes</strong>() <a class="anchor-link" href="#get:routes"
               title="Permalink to HipsterRouter.get routes">#</a></h4>
 <div class="doc">
-
+<p>As shown in the constructor example, each route must include three values:</p><ul><li>A string representation of the route, which can include placeholders (e.g. "page:num")</li><li>The method to be invoked when the route is matched</li><li>A string that names the event that is generated for <a class="crossref" href="../hipster_router/HipsterRouter.html#on">on</a>.</li></ul>
 <pre class="source">
 List get routes() =&gt; [];
 </pre>
@@ -61,7 +79,16 @@ List get routes() =&gt; [];
             title="Permalink to HipsterRouter.on">#</a>
         </h4>
         <div class="doc">
-
+<p>The router exposes named events on which listeners can wait. For example,
+if the router has a "page" route, the event will be available on the
+'route:page' event:</p>
+<pre><code>HipsterRouter app = new MyRouter();
+  app.
+    on['route:page'].
+    add((num) {
+      print("Routed to page: $num");
+    });
+</code></pre>
 <pre class="source">
 RouterEvents on;
 </pre>
