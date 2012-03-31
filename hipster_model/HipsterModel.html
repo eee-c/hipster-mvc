@@ -24,7 +24,12 @@
             <strong>HipsterModel</strong></h2>
         
 <div class="doc">
-
+<p>HipsterModel encapsulates individual records in your backend datastore. At
+its most concise, a model need only to implement the <a class="crossref" href="../hipster_model/HipsterModel.html#get:urlRoot">urlRoot</a> method:</p>
+<pre><code>class ComicBook extends HipsterModel {
+  get urlRoot() =&gt; '/comics';
+}
+</code></pre>
 </div>
 <h3>Implements</h3>
 <p>
@@ -32,13 +37,15 @@
 <h3>Constructors</h3>
 <div class="method"><h4 id="HipsterModel">
 <span class="show-code">Code</span>
-new <strong>HipsterModel</strong>(attributes, [collection]) <a class="anchor-link" href="#HipsterModel"
+new <strong>HipsterModel</strong>([attributes]) <a class="anchor-link" href="#HipsterModel"
               title="Permalink to HipsterModel.HipsterModel">#</a></h4>
 <div class="doc">
-
+<p>If attributes is not supplied, it will be initalied to an empty
+<code>HashMap</code>.</p>
 <pre class="source">
-HipsterModel(this.attributes, [this.collection]) {
+HipsterModel([this.attributes]) {
   on = new ModelEvents();
+  if (attributes == null) attributes = {};
 }
 </pre>
 </div>
@@ -63,7 +70,11 @@ static String hash() {
 <strong>operator []</strong>(attr) <a class="anchor-link" href="#:index"
               title="Permalink to HipsterModel.operator []">#</a></h4>
 <div class="doc">
-
+<p>Convenience operator for attribute lookup:</p>
+<pre><code>var comic = new ComicBook({'title': 'Superman'});
+comic['title'];
+// =&gt; 'Superman'
+</code></pre>
 <pre class="source">
 operator [](attr) =&gt; attributes[attr];
 </pre>
@@ -74,7 +85,13 @@ operator [](attr) =&gt; attributes[attr];
 <a href="http://api.dartlang.org/dart_core/Future.html" ref="external">Future</a> <strong>delete</strong>() <a class="anchor-link" href="#delete"
               title="Permalink to HipsterModel.delete">#</a></h4>
 <div class="doc">
-
+<p>Instructs the backend datastore that this recored should be deleted. Upon
+successful removal, this method returns a <code>Future</code> that can be used to
+perform subsequent action:</p>
+<pre><code>comic.
+  delete.
+  then((_) { print("Now I am sad.") });
+</code></pre>
 <pre class="source">
 Future&lt;HipsterModel&gt; delete() {
   Completer completer = new Completer();
@@ -98,7 +115,7 @@ Future&lt;HipsterModel&gt; delete() {
 <strong>get id</strong>() <a class="anchor-link" href="#get:id"
               title="Permalink to HipsterModel.get id">#</a></h4>
 <div class="doc">
-
+<p>The ID of the record in the backend store.</p>
 <pre class="source">
 get id() =&gt; attributes['id'];
 </pre>
@@ -109,9 +126,10 @@ get id() =&gt; attributes['id'];
 <a href="http://api.dartlang.org/dart_core/bool.html" ref="external">bool</a> <strong>isSaved</strong>() <a class="anchor-link" href="#isSaved"
               title="Permalink to HipsterModel.isSaved">#</a></h4>
 <div class="doc">
-
+<p>Returns true if the model has been <em>previously</em> saved to the backend (not
+if the most recent changes have been saved).</p>
 <pre class="source">
-bool isSaved() =&gt; id == null;
+bool isSaved() =&gt; id != null;
 </pre>
 </div>
 </div>
@@ -120,12 +138,18 @@ bool isSaved() =&gt; id == null;
 <a href="http://api.dartlang.org/dart_core/Future.html" ref="external">Future</a> <strong>save</strong>() <a class="anchor-link" href="#save"
               title="Permalink to HipsterModel.save">#</a></h4>
 <div class="doc">
-
+<p>Either creates or updates this record in the backend datastore. This
+method returns a <code>Future</code> that can be used to perform subsequent actions
+upon successful save:</p>
+<pre><code>comic.
+  save().
+  then((_) { print("Yay! New comics!"); });
+</code></pre>
 <pre class="source">
 Future&lt;HipsterModel&gt; save() {
   Completer completer = new Completer();
-
-  Future after_call = HipsterSync.call('create', this);
+  String operation = isSaved() ? 'update' : 'create';
+  Future after_call = HipsterSync.call(operation, this);
 
   after_call.
     then((attrs) {
@@ -147,24 +171,33 @@ Future&lt;HipsterModel&gt; save() {
 </div>
 <div class="method"><h4 id="get:url">
 <span class="show-code">Code</span>
-<strong>get url</strong>() <a class="anchor-link" href="#get:url"
+<a href="http://api.dartlang.org/dart_core/String.html" ref="external">String</a> <strong>get url</strong>() <a class="anchor-link" href="#get:url"
               title="Permalink to HipsterModel.get url">#</a></h4>
 <div class="doc">
-
+<p>The URL at which creates or updates are stored. If the model has already
+been saved to the backend, then the ID will be appended
+(e.g. <code>/comics/42</code>).</p>
 <pre class="source">
-get url() =&gt; isSaved() ?
-    urlRoot : "$urlRoot/$id";
+String get url() =&gt; isSaved() ?
+  "$urlRoot/$id" : urlRoot;
 </pre>
 </div>
 </div>
 <div class="method"><h4 id="get:urlRoot">
 <span class="show-code">Code</span>
-<strong>get urlRoot</strong>() <a class="anchor-link" href="#get:urlRoot"
+<a href="http://api.dartlang.org/dart_core/String.html" ref="external">String</a> <strong>get urlRoot</strong>() <a class="anchor-link" href="#get:urlRoot"
               title="Permalink to HipsterModel.get urlRoot">#</a></h4>
 <div class="doc">
-
+<p>The base URL for REST-like operations <em>without</em> the trailing slash
+(e.g. <code>/comics</code>). This is delegated to the collection if present.</p>
+<p>If the subclass is ever used without a collection, then the subclass is
+required to define this:</p>
+<pre><code>class ComicBook extends HipsterModel {
+  get urlRoot() =&gt; '/comics';
+}
+</code></pre>
 <pre class="source">
-get urlRoot() =&gt; (collection == null) ?
+String get urlRoot() =&gt; (collection == null) ?
   "" : collection.url;
 </pre>
 </div>
@@ -177,7 +210,7 @@ get urlRoot() =&gt; (collection == null) ?
             title="Permalink to HipsterModel.attributes">#</a>
         </h4>
         <div class="doc">
-
+<p>The internal representation of the record.</p>
 <pre class="source">
 Map attributes;
 </pre>
@@ -190,7 +223,7 @@ Map attributes;
             title="Permalink to HipsterModel.collection">#</a>
         </h4>
         <div class="doc">
-
+<p>If the model is part of a collection, it will be stored here.</p>
 <pre class="source">
 Collection collection;
 </pre>
@@ -203,7 +236,9 @@ Collection collection;
             title="Permalink to HipsterModel.on">#</a>
         </h4>
         <div class="doc">
-
+<p>An <code>Events</code> object for the model. Any internal changes to the model will
+broadcast events from this object.  See <a class="crossref" href="../hipster_model/ModelEvents.html">ModelEvents</a> for the complete
+list of events supported.</p>
 <pre class="source">
 ModelEvents on;
 </pre>

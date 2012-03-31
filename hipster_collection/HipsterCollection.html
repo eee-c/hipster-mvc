@@ -114,11 +114,8 @@ fetch() {
     call('read', this).
     then((list) {
       list.forEach((attrs) {
-        var new_model = modelMaker(attrs);
-        new_model.collection = this;
-        models.add(new_model);
+        models.add(_buildModel(attrs));
       });
-
       on.load.dispatch(new CollectionEvent('load', this));
     });
 }
