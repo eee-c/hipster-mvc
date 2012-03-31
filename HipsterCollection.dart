@@ -40,11 +40,8 @@ class HipsterCollection implements Collection {
       call('read', this).
       then((list) {
         list.forEach((attrs) {
-          var new_model = modelMaker(attrs);
-          new_model.collection = this;
-          models.add(new_model);
+          models.add(_buildModel(attrs));
         });
-
         on.load.dispatch(new CollectionEvent('load', this));
       });
   }
@@ -73,6 +70,9 @@ class HipsterCollection implements Collection {
 
   _buildModel(attrs) {
     var new_model = modelMaker(attrs);
+    // Give the factory a chance to define attributes on the model, if it does
+    // not, explicitly set them.
+    if (new_model.attributes.isEmpty()) new_model.attributes = attrs;
     new_model.collection = this;
     return new_model;
   }
