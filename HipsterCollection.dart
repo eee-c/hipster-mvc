@@ -97,7 +97,7 @@ class CollectionEventList implements EventListenerList {
     listeners = [];
   }
 
-  CollectionEventList add(fn) {
+  CollectionEventList add(fn, [bool useCapture]) {
     listeners.add(fn);
     return this;
   }

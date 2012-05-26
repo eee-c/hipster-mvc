@@ -142,7 +142,7 @@ class ModelEventList implements EventListenerList {
     listeners = [];
   }
 
-  add(fn) {
+  add(fn, [bool useCapture]) {
     listeners.add(fn);
   }
 
