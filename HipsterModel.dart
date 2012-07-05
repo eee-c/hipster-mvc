@@ -63,6 +63,26 @@ class HipsterModel implements Hashable {
   /// Returns true if the model has been _previously_ saved to the backend (not
   /// if the most recent changes have been saved).
   bool isSaved() => id != null;
+  
+  /// TODO
+  Future<HipsterModel> fetch() {
+    Completer<HipsterModel> completer = new Completer<HipsterModel>();
+    Future after_call = HipsterSync.call('get', this);
+    
+    after_call.
+      then((attrs) {
+        this.attributes = attrs;
+        on.load.dispatch(new ModelEvent('load', this));
+        completer.complete(this);
+      });
+    
+    after_call.handleException((e) {
+      completer.completeException(e);
+      return true;
+    });
+    
+    return completer.future;
+  }
 
   /// Either creates or updates this record in the backend datastore. This
   /// method returns a [Future] that can be used to perform subsequent actions
