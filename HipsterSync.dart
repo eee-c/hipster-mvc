@@ -43,31 +43,26 @@ class HipsterSync {
            verb   = _methodMap.containsKey(method) ?
                       _methodMap[method] : method;
 
-    XMLHttpRequest request = new XMLHttpRequest();
-    Completer completer = new Completer();
-    
+    var request = new XMLHttpRequest(),
+        completer = new Completer();
+
     request.
       on.
       load.
       add((event) {
-        XMLHttpRequest req = event.target;
+        var req = event.target;
 
         if (req.status > 299) {
           completer.
             completeException("That ain't gonna work: ${req.status}");
         }
         else {
-          print("Success!");
-          print(req.response);
           var json = JSON.parse(req.responseText);
           completer.complete(json);
         }
       });
 
     request.open(verb, model.url, true);
-
-    // Tell the server that we expect JSON!
-    request.setRequestHeader("Accept", "application/json");
 
     // POST and PUT HTTP request bodies if necessary
     if (verb == 'post' || verb == 'put') {
