@@ -57,8 +57,6 @@ class HipsterSync {
             completeException("That ain't gonna work: ${req.status}");
         }
         else {
-          print("Success!");
-          print(req.response);
           var json = JSON.parse(req.responseText);
           completer.complete(json);
         }
