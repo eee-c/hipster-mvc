@@ -111,8 +111,8 @@ class RouterEventList implements EventListenerList {
     listeners = [];
   }
 
-  RouterEventList add(fn) {
-    listeners.add(fn);
+  RouterEventList add(EventListener handler, [bool useCapture]) {
+    listeners.add(handler);
     return this;
   }
 
