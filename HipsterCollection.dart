@@ -35,15 +35,24 @@ class HipsterCollection implements Collection {
     return ret;
   }
 
-  fetch() {
-    HipsterSync.
-      call('read', this).
-      then((list) {
+  Future<HipsterCollection> fetch() {
+    Completer completer = new Completer();
+    
+    Future after_call = HipsterSync.call('read', this);
+    after_call.then((list) {
         list.forEach((attrs) {
           models.add(_buildModel(attrs));
         });
         on.load.dispatch(new CollectionEvent('load', this));
+        completer.complete(this);
       });
+    
+    after_call.handleException((e) {
+      completer.completeException(e);
+      return true;
+    });
+    
+    return completer.future;
   }
 
   create(attrs) {
