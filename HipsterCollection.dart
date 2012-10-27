@@ -24,6 +24,16 @@ class HipsterCollection implements Collection {
     models.forEach(fn);
   }
 
+  iterator() => models.iterator();
+
+  bool isEmpty => models.isEmpty;
+  map(fn) => models.map(fn);
+  filter(fn) => models.filter(fn);
+  contains(element) => models.contains(element);
+  reduce(intialValue, fn) => models.reduce(initialValue, fn);
+  every(fn) => models.every(fn);
+  some(fn) => models.some(fn);
+
   int get length() => models.length;
 
   // Be Backbone like
