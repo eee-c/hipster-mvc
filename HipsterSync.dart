@@ -3,14 +3,14 @@
 #import('dart:html');
 #import('dart:json');
 
-typedef Future<HashMap> SyncCallback(String method, Dynamic model);
+//typedef Future<HashMap> SyncCallback(String method, Dynamic model);
 
 class HipsterSync {
   // private class variable to hold an application injected sync behavior
-  static SyncCallback _injected_sync;
+  static var _injected_sync;
 
   // setter for the injected sync behavior
-  static set sync(SyncCallback fn) {
+  static set sync(fn) {
     _injected_sync = fn;
   }
 
@@ -38,14 +38,14 @@ class HipsterSync {
   };
 
   // default sync behavior
-  static SyncCallback _defaultSync(_method, model) {
+  static _defaultSync(_method, model) {
     String method = _method.toLowerCase(),
            verb   = _methodMap.containsKey(method) ?
                       _methodMap[method] : method;
 
-    XMLHttpRequest request = new XMLHttpRequest();
-    Completer completer = new Completer();
-    
+    var request = new HttpRequest(),
+        completer = new Completer();
+
     request.
       on.
       load.

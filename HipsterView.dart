@@ -10,7 +10,7 @@ class HipsterView {
   HipsterModel model;
   Element el;
 
-  HipsterView([el, this.model, this.collection]) {
+  HipsterView({el, this.model, this.collection}) {
     if (el != null) {
       this.el = (el is Element) ? el : document.query(el);
     }

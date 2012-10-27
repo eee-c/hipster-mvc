@@ -72,7 +72,7 @@ class HipsterCollection implements Collection {
     var new_model = modelMaker(attrs);
     // Give the factory a chance to define attributes on the model, if it does
     // not, explicitly set them.
-    if (new_model.attributes.isEmpty()) new_model.attributes = attrs;
+    if (new_model.attributes.isEmpty) new_model.attributes = attrs;
     new_model.collection = this;
     return new_model;
   }
@@ -97,7 +97,7 @@ class CollectionEventList implements EventListenerList {
     listeners = [];
   }
 
-  CollectionEventList add(fn, [bool useCapture]) {
+  CollectionEventList add(fn, {bool useCapture}) {
     listeners.add(fn);
     return this;
   }
@@ -113,7 +113,7 @@ class CollectionEvent implements Event {
   HipsterCollection collection;
   HipsterModel _model;
 
-  CollectionEvent(this._type, this.collection, [model]) {
+  CollectionEvent(this._type, this.collection, {model}) {
     _model = model;
   }
 
