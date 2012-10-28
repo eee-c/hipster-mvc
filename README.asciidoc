@@ -1,10 +1,60 @@
 = Hipster MVC
 
-*NEW* http://eee-c.github.com/hipster-mvc[API Documentation].
+The MVC library for Dart, inspired by Backbone.js and used extensively in the Pragmatic Programmers book, "Dart for Hipsters".
+
+http://eee-c.github.com/hipster-mvc[API Documentation].
+
+== Getting Started
+
+A fully functional sample app is available at http://eee-c.github.com/dart-comics[dart-comics].
+
+Displaying a collection of resources is as simple as defining model, collection and collection view classes and then instantiating them:
+
+----
+#import('Collections.Comics.dart', prefix: 'Collections');
+#import('Views.Comics.dart', prefix: 'Views');
+
+main() {
+  var my_comics_collection = new Collections.Comics()
+    , comics_view = new Views.Comics(
+        el:'#comics-list',
+        collection: my_comics_collection
+      );
+
+  my_comics_collection.fetch();
+}
+----
+
+If the backend exposes a REST-like API, your collection and model classes can be very brief.
+
+=== A Collection Example
+
+----
+#library('Collection class to describe my comic book collection');
+
+#import('package:hipster-mvc/HipsterCollection.dart');
+
+#import('Models.ComicBook.dart');
+
+class Comics extends HipsterCollection {
+  get url => '/comics';
+  modelMaker(attrs) => new ComicBook(attrs);
+}
+----
+
+=== A Model Example
+
+----
+#library('Model class describing a comic book');
+
+#import('package:hipster-mvc/HipsterModel.dart');
+
+class ComicBook extends HipsterModel {
+  ComicBook(attributes) : super(attributes);
+}
+----
 
 
-This is a very, very alpha release of a Dart-based MVC framework. It is not ready for real use yet.
-
-Details and usage examples to come later.
+== More information
 
 This grew out of a series of blog entries at: http://japhr.blogspot.com/search/label/dart
