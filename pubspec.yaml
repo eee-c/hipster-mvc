@@ -1,0 +1,5 @@
+name: hipster-mvc
+version: 0.1.0
+description: Dart-based MVC framework
+author: Chris Strom <chris@eeecomputes.com>
+homepage: https://github.com/eee-c/hipster-mvc
