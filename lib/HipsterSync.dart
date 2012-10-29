@@ -50,7 +50,7 @@ class HipsterSync {
       on.
       load.
       add((event) {
-        XMLHttpRequest req = event.target;
+        HttpRequest req = event.target;
 
         if (req.status > 299) {
           completer.
