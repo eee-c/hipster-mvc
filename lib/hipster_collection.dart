@@ -16,8 +16,8 @@ class HipsterCollection implements Collection {
     models = <HipsterModel>[];
   }
 
-  abstract HipsterModel modelMaker(attrs);
-  abstract String get url;
+  HipsterModel modelMaker(attrs);
+  String get url;
 
   // Be List-like
   void forEach(fn) {
