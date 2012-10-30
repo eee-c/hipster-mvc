@@ -26,7 +26,7 @@ class HipsterCollection implements Collection {
 
   iterator() => models.iterator();
 
-  bool isEmpty => models.isEmpty;
+  bool get isEmpty => models.isEmpty;
   map(fn) => models.map(fn);
   filter(fn) => models.filter(fn);
   contains(element) => models.contains(element);
