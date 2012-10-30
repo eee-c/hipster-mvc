@@ -3,7 +3,7 @@
 #import('dart:html');
 #import('dart:json');
 
-//typedef Future<HashMap> SyncCallback(String method, Dynamic model);
+//typedef Future<HashMap> SyncCallback(String method, dynamic model);
 
 class HipsterSync {
   // private class variable to hold an application injected sync behavior
@@ -21,7 +21,7 @@ class HipsterSync {
 
   // static method for HipsterModel and HipsterCollection to invoke -- will
   // forward the call to the appropriate behavior (injected or default)
-  static Future<Dynamic> call(method, model) {
+  static Future<dynamic> call(method, model) {
     if (_injected_sync == null) {
       return _defaultSync(method, model);
     }
