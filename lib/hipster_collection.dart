@@ -17,7 +17,7 @@ class HipsterCollection implements Collection {
   }
 
   abstract HipsterModel modelMaker(attrs);
-  abstract String get url();
+  abstract String get url;
 
   // Be List-like
   void forEach(fn) {
@@ -34,7 +34,7 @@ class HipsterCollection implements Collection {
   every(fn) => models.every(fn);
   some(fn) => models.some(fn);
 
-  int get length() => models.length;
+  int get length => models.length;
 
   // Be Backbone like
   operator [](id) {
@@ -96,8 +96,8 @@ class CollectionEvents implements Events {
     insert_listeners = new CollectionEventList();
   }
 
-  CollectionEventList get load() => load_listeners;
-  CollectionEventList get insert() => insert_listeners;
+  CollectionEventList get load => load_listeners;
+  CollectionEventList get insert => insert_listeners;
 }
 
 class CollectionEventList implements EventListenerList {
@@ -127,7 +127,7 @@ class CollectionEvent implements Event {
     _model = model;
   }
 
-  String get type() =>_type;
+  String get type =>_type;
 
-  HipsterModel get model() => _model;
+  HipsterModel get model => _model;
 }

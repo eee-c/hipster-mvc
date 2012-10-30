@@ -8,7 +8,7 @@
 /// HipsterModel encapsulates individual records in your backend datastore. At
 /// its most concise, a model need only to implement the [urlRoot] method:
 ///     class ComicBook extends HipsterModel {
-///       get urlRoot() => '/comics';
+///       get urlRoot => '/comics';
 ///     }
 class HipsterModel implements Hashable {
   /// The internal representation of the record.
@@ -41,12 +41,12 @@ class HipsterModel implements Hashable {
   operator [](attr) => attributes[attr];
 
   /// The ID of the record in the backend store.
-  get id() => attributes['id'];
+  get id => attributes['id'];
 
   /// The URL at which creates or updates are stored. If the model has already
   /// been saved to the backend, then the ID will be appended
   /// (e.g. `/comics/42`).
-  String get url() => isSaved() ?
+  String get url => isSaved() ?
     "$urlRoot/$id" : urlRoot;
 
   /// The base URL for REST-like operations _without_ the trailing slash
@@ -55,9 +55,9 @@ class HipsterModel implements Hashable {
   /// If the subclass is ever used without a collection, then the subclass is
   /// required to define this:
   ///     class ComicBook extends HipsterModel {
-  ///       get urlRoot() => '/comics';
+  ///       get urlRoot => '/comics';
   ///     }
-  String get urlRoot() => (collection == null) ?
+  String get urlRoot => (collection == null) ?
     "" : collection.url;
 
   /// Returns true if the model has been _previously_ saved to the backend (not
@@ -130,9 +130,9 @@ class ModelEvents implements Events {
     delete_list = new ModelEventList();
   }
 
-  get load() { return load_list; }
-  get save() { return save_list; }
-  get delete() { return delete_list; }
+  get load { return load_list; }
+  get save { return save_list; }
+  get delete { return delete_list; }
 }
 
 class ModelEventList implements EventListenerList {
