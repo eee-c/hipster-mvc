@@ -2,7 +2,7 @@
 
 #import("dart:html");
 
-#import("HipsterHistory.dart");
+#import("hipster_history.dart");
 
 class HipsterRouter {
   /// The router exposes named events on which listeners can wait. For example,

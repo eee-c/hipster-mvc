@@ -2,8 +2,8 @@
 
 #import('dart:html');
 
-#import('HipsterCollection.dart');
-#import('HipsterModel.dart');
+#import('hipster_collection.dart');
+#import('hipster_model.dart');
 
 class HipsterView {
   HipsterCollection collection;

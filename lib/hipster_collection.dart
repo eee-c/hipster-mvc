@@ -3,8 +3,8 @@
 #import('dart:html');
 #import('dart:json');
 
-#import('HipsterModel.dart');
-#import('HipsterSync.dart');
+#import('hipster_model.dart');
+#import('hipster_sync.dart');
 
 class HipsterCollection implements Collection {
   CollectionEvents on;

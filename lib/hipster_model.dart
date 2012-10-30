@@ -3,7 +3,7 @@
 #import('dart:html');
 #import('dart:json');
 
-#import('HipsterSync.dart');
+#import('hipster_sync.dart');
 
 /// HipsterModel encapsulates individual records in your backend datastore. At
 /// its most concise, a model need only to implement the [urlRoot] method:
