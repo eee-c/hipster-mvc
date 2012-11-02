@@ -5,46 +5,54 @@
 #import("hipster_history.dart");
 
 class HipsterRouter {
-  /// The router exposes named events on which listeners can wait. For example,
-  /// if the router has a "page" route, the event will be available on the
-  /// 'route:page' event:
-  ///     HipsterRouter app = new MyRouter();
-  ///       app.
-  ///         on['route:page'].
-  ///         add((num) {
-  ///           print("Routed to page: $num");
-  ///         });
+  /**
+   * The router exposes named events on which listeners can wait. For example,
+   * if the router has a "page" route, the event will be available on the
+   * 'route:page' event:
+   *
+   *     HipsterRouter app = new MyRouter();
+   *       app.
+   *         on['route:page'].
+   *         add((num) {
+   *           print("Routed to page: $num");
+   *         });
+   */
   RouterEvents on;
 
-  /// Application routers must subclass [HipsterRouter], definining at least the
-  /// [routes] getter:
-  ///     class MyRouter extends HipsterRouter {
-  ///       List get routes() =>
-  ///         [
-  ///           ['page/:num', pageNum, 'page']
-  ///         ];
-  ///       //
-  ///       pageNum(num) {
-  ///         var el = document.query('body');
-  ///          el.innerHTML = _pageNumTemplate(num);
-  ///       }
-  ///     }
-  ///
-  /// Start the router by creating an instance of the routing class and by
-  /// telling [HipsterHistory] to start listening for pushState events:
-  ///
-  ///     HipsterRouter app = new MyRouter();
-  ///     HipsterHistory.startHistory();
+  /**
+   * Application routers must subclass [HipsterRouter], definining at least the
+   * [routes] getter:
+   *
+   *     class MyRouter extends HipsterRouter {
+   *       List get routes() =>
+   *         [
+   *           ['page/:num', pageNum, 'page']
+   *         ];
+   *       //
+   *       pageNum(num) {
+   *         var el = document.query('body');
+   *          el.innerHTML = _pageNumTemplate(num);
+   *       }
+   *     }
+   *
+   * Start the router by creating an instance of the routing class and by
+   * telling [HipsterHistory] to start listening for pushState events:
+   *
+   *      HipsterRouter app = new MyRouter();
+   *      HipsterHistory.startHistory();
+   */
   HipsterRouter() {
     on = new RouterEvents();
     this._initializeRoutes();
   }
 
-  /// As shown in the constructor example, each route must include three values:
-  ///
-  /// * A string representation of the route, which can include placeholders (e.g. "page:num")
-  /// * The method to be invoked when the route is matched
-  /// * A string that names the event that is generated for [on].
+  /**
+   * As shown in the constructor example, each route must include three values:
+   *
+   * * A string representation of the route, which can include placeholders (e.g. "page:num")
+   * * The method to be invoked when the route is matched
+   * * A string that names the event that is generated for [on].
+   */
   List get routes() => [];
 
   _initializeRoutes() {
