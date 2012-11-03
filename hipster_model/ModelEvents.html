@@ -2,40 +2,64 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>Library hipster_model / Class ModelEvents</title>
+        <title>ModelEvents class / hipster_model Library / Hipster MVC</title>
         <link rel="stylesheet" type="text/css"
-            href="../styles.css" />
+            href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
-        <link rel="shortcut icon" href="../favicon.ico" />
-        <script src="../client-live-nav.js"></script>
+        <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
         <body data-library="hipster_model" data-type="ModelEvents">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
-          <a href="../index.html">Hipster MVC Documentation</a>
-         &rsaquo; <a href="../hipster_model.html">hipster_model</a> &rsaquo; <a href="../hipster_model/ModelEvents.html">ModelEvents</a></div>
+          <a href="../index.html">Hipster MVC</a>
+         &rsaquo; <a href="../hipster_model.html">hipster_model</a> &rsaquo; <a href="../hipster_model/ModelEvents.html">ModelEvents</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
         <div class="nav">
         
 </div>
 <div class="content">
-        <h2>Class
-            <strong>ModelEvents</strong></h2>
+        <h2><strong>ModelEvents</strong>
+          class
+        </h2>
         
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<pre class="source">
+class ModelEvents implements Events {
+  var load_list;
+  var save_list;
+  var delete_list;
 
+  ModelEvents() {
+    load_list = new ModelEventList();
+    save_list = new ModelEventList();
+    delete_list = new ModelEventList();
+  }
+
+  get load { return load_list; }
+  get save { return save_list; }
+  get delete { return delete_list; }
+}
+</pre>
 </div>
 <h3>Implements</h3>
 <p>
-<span class="type-box"><span class="icon-interface"></span><a href="http://api.dartlang.org/html/Events.html" ref="external">Events</a></span></p>
+<span class="type-box"><span class="icon-class"></span><a href="../dart_html/Events.html">Events</a></span></p>
+<div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="ModelEvents">
-<span class="show-code">Code</span>
+<button class="show-code">Code</button>
 new <strong>ModelEvents</strong>() <a class="anchor-link" href="#ModelEvents"
               title="Permalink to ModelEvents.ModelEvents">#</a></h4>
 <div class="doc">
-
 <pre class="source">
 ModelEvents() {
   load_list = new ModelEventList();
@@ -45,83 +69,102 @@ ModelEvents() {
 </pre>
 </div>
 </div>
-<h3>Methods</h3>
-<div class="method"><h4 id="get:delete">
-<span class="show-code">Code</span>
-<strong>get delete</strong>() <a class="anchor-link" href="#get:delete"
-              title="Permalink to ModelEvents.get delete">#</a></h4>
-<div class="doc">
-
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="delete">
+<button class="show-code">Code</button>
+final         <strong>delete</strong> <a class="anchor-link"
+            href="#delete"
+            title="Permalink to ModelEvents.delete">#</a>
+        </h4>
+        <div class="doc">
 <pre class="source">
-get delete() { return delete_list; }
+get delete { return delete_list; }
 </pre>
 </div>
 </div>
-<div class="method"><h4 id="get:load">
-<span class="show-code">Code</span>
-<strong>get load</strong>() <a class="anchor-link" href="#get:load"
-              title="Permalink to ModelEvents.get load">#</a></h4>
-<div class="doc">
-
-<pre class="source">
-get load() { return load_list; }
-</pre>
-</div>
-</div>
-<div class="method"><h4 id="get:save">
-<span class="show-code">Code</span>
-<strong>get save</strong>() <a class="anchor-link" href="#get:save"
-              title="Permalink to ModelEvents.get save">#</a></h4>
-<div class="doc">
-
-<pre class="source">
-get save() { return save_list; }
-</pre>
-</div>
-</div>
-<h3>Fields</h3>
 <div class="field"><h4 id="delete_list">
-<span class="show-code">Code</span>
+<button class="show-code">Code</button>
 var         <strong>delete_list</strong> <a class="anchor-link"
             href="#delete_list"
             title="Permalink to ModelEvents.delete_list">#</a>
         </h4>
         <div class="doc">
-
 <pre class="source">
 var delete_list;
 </pre>
 </div>
 </div>
+<div class="field"><h4 id="load">
+<button class="show-code">Code</button>
+final         <strong>load</strong> <a class="anchor-link"
+            href="#load"
+            title="Permalink to ModelEvents.load">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+get load { return load_list; }
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="load_list">
-<span class="show-code">Code</span>
+<button class="show-code">Code</button>
 var         <strong>load_list</strong> <a class="anchor-link"
             href="#load_list"
             title="Permalink to ModelEvents.load_list">#</a>
         </h4>
         <div class="doc">
-
 <pre class="source">
 var load_list;
 </pre>
 </div>
 </div>
+<div class="field"><h4 id="save">
+<button class="show-code">Code</button>
+final         <strong>save</strong> <a class="anchor-link"
+            href="#save"
+            title="Permalink to ModelEvents.save">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+get save { return save_list; }
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="save_list">
-<span class="show-code">Code</span>
+<button class="show-code">Code</button>
 var         <strong>save_list</strong> <a class="anchor-link"
             href="#save_list"
             title="Permalink to ModelEvents.save_list">#</a>
         </h4>
         <div class="doc">
-
 <pre class="source">
 var save_list;
 </pre>
 </div>
 </div>
+</div>
+<div class="inherited">
+<h3>Operators</h3>
+<div class="method inherited"><h4 id="[]">
+<button class="show-code">Code</button>
+EventListenerList <strong>operator []</strong>(String type) <a class="anchor-link" href="#[]"
+              title="Permalink to ModelEvents.operator []">#</a></h4>
+<div class="inherited-from">inherited from Events </div><div class="doc">
+<pre class="source">
+EventListenerList operator [](String type);
+</pre>
+</div>
+</div>
+</div>
         </div>
         <div class="clear"></div>
         </div>
-        <div class="footer"></div>
+        
+        <div class="footer">
+          <div>This page was generated at 2012-11-02 23:56:22.245</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
         </body></html>
         

@@ -2,39 +2,149 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>Library hipster_sync / Class HipsterSync</title>
+        <title>HipsterSync class / hipster_sync Library / Hipster MVC</title>
         <link rel="stylesheet" type="text/css"
-            href="../styles.css" />
+            href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
-        <link rel="shortcut icon" href="../favicon.ico" />
-        <script src="../client-live-nav.js"></script>
+        <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
         <body data-library="hipster_sync" data-type="HipsterSync">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
-          <a href="../index.html">Hipster MVC Documentation</a>
-         &rsaquo; <a href="../hipster_sync.html">hipster_sync</a> &rsaquo; <a href="../hipster_sync/HipsterSync.html">HipsterSync</a></div>
+          <a href="../index.html">Hipster MVC</a>
+         &rsaquo; <a href="../hipster_sync.html">hipster_sync</a> &rsaquo; <a href="../hipster_sync/HipsterSync.html">HipsterSync</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
         <div class="nav">
         
 </div>
 <div class="content">
-        <h2>Class
-            <strong>HipsterSync</strong></h2>
+        <h2><strong>HipsterSync</strong>
+          class
+        </h2>
         
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<pre class="source">
+class HipsterSync {
+  // private class variable to hold an application injected sync behavior
+  static var _injected_sync;
 
+  // setter for the injected sync behavior
+  static set sync(fn) {
+    _injected_sync = fn;
+  }
+
+  // delete the injected sync behavior
+  static useDefaultSync() {
+    _injected_sync = null;
+  }
+
+  // static method for HipsterModel and HipsterCollection to invoke -- will
+  // forward the call to the appropriate behavior (injected or default)
+  static Future&lt;dynamic&gt; call(method, model) {
+    if (_injected_sync == null) {
+      return _defaultSync(method, model);
+    }
+    else {
+      // TODO check for null future returned from _injected_sync
+      return _injected_sync(method, model);
+    }
+  }
+
+  static Map _methodMap = const {
+    'create': 'post',
+    'update': 'put',
+    'read': 'get'
+  };
+
+  // default sync behavior
+  static _defaultSync(_method, model) {
+    String method = _method.toLowerCase(),
+           verb   = _methodMap.containsKey(method) ?
+                      _methodMap[method] : method;
+
+    var request = new HttpRequest(),
+        completer = new Completer();
+
+    request.
+      on.
+      load.
+      add((event) {
+        HttpRequest req = event.target;
+
+        if (req.status &gt; 299) {
+          completer.
+            completeException("That ain't gonna work: ${req.status}");
+        }
+        else {
+          var json = JSON.parse(req.responseText);
+          completer.complete(json);
+        }
+      });
+
+    request.open(verb, model.url, true);
+
+    // Tell the server that we expect JSON!
+    request.setRequestHeader("Accept", "application/json");
+
+    // POST and PUT HTTP request bodies if necessary
+    if (verb == 'post' || verb == 'put') {
+      request.setRequestHeader('Content-type', 'application/json');
+      request.send(JSON.stringify(model.attributes));
+    }
+    else {
+      request.send();
+    }
+
+    return completer.future;
+  }
+}
+</pre>
 </div>
+<div>
+<h3>Static Properties</h3>
+<div class="method"><h4 id="sync=">
+<button class="show-code">Code</button>
+<strong>set sync</strong>(fn) <a class="anchor-link" href="#sync="
+              title="Permalink to HipsterSync.set sync">#</a></h4>
+<div class="doc">
+<pre class="source">
+static set sync(fn) {
+  _injected_sync = fn;
+}
+</pre>
+</div>
+</div>
+</div>
+<div>
 <h3>Static Methods</h3>
+<div class="method"><h4 id="useDefaultSync">
+<button class="show-code">Code</button>
+<strong>useDefaultSync</strong>() <a class="anchor-link" href="#useDefaultSync"
+              title="Permalink to HipsterSync.useDefaultSync">#</a></h4>
+<div class="doc">
+<pre class="source">
+static useDefaultSync() {
+  _injected_sync = null;
+}
+</pre>
+</div>
+</div>
 <div class="method"><h4 id="call">
-<span class="show-code">Code</span>
-<a href="http://api.dartlang.org/dart_core/Future.html" ref="external">Future</a> <strong>call</strong>(method, model) <a class="anchor-link" href="#call"
+<button class="show-code">Code</button>
+Future&lt;Dynamic&gt; <strong>call</strong>(method, model) <a class="anchor-link" href="#call"
               title="Permalink to HipsterSync.call">#</a></h4>
 <div class="doc">
-
 <pre class="source">
-static Future&lt;Dynamic&gt; call(method, model) {
+static Future&lt;dynamic&gt; call(method, model) {
   if (_injected_sync == null) {
     return _defaultSync(method, model);
   }
@@ -46,35 +156,14 @@ static Future&lt;Dynamic&gt; call(method, model) {
 </pre>
 </div>
 </div>
-<div class="method"><h4 id="set:sync">
-<span class="show-code">Code</span>
-<strong>set sync</strong>(<a href="http://api.dartlang.org/dart_core/Future.html" ref="external">Future</a> fn(<a href="http://api.dartlang.org/dart_core/String.html" ref="external">String</a> method, model)) <a class="anchor-link" href="#set:sync"
-              title="Permalink to HipsterSync.set sync">#</a></h4>
-<div class="doc">
-
-<pre class="source">
-static set sync(SyncCallback fn) {
-  _injected_sync = fn;
-}
-</pre>
-</div>
-</div>
-<div class="method"><h4 id="useDefaultSync">
-<span class="show-code">Code</span>
-<strong>useDefaultSync</strong>() <a class="anchor-link" href="#useDefaultSync"
-              title="Permalink to HipsterSync.useDefaultSync">#</a></h4>
-<div class="doc">
-
-<pre class="source">
-static useDefaultSync() {
-  _injected_sync = null;
-}
-</pre>
-</div>
 </div>
         </div>
         <div class="clear"></div>
         </div>
-        <div class="footer"></div>
+        
+        <div class="footer">
+          <div>This page was generated at 2012-11-02 23:56:22.280</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
         </body></html>
         

@@ -2,40 +2,60 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>Library hipster_collection / Class CollectionEvents</title>
+        <title>CollectionEvents class / hipster_collection Library / Hipster MVC</title>
         <link rel="stylesheet" type="text/css"
-            href="../styles.css" />
+            href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
-        <link rel="shortcut icon" href="../favicon.ico" />
-        <script src="../client-live-nav.js"></script>
+        <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
         <body data-library="hipster_collection" data-type="CollectionEvents">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
-          <a href="../index.html">Hipster MVC Documentation</a>
-         &rsaquo; <a href="../hipster_collection.html">hipster_collection</a> &rsaquo; <a href="../hipster_collection/CollectionEvents.html">CollectionEvents</a></div>
+          <a href="../index.html">Hipster MVC</a>
+         &rsaquo; <a href="../hipster_collection.html">hipster_collection</a> &rsaquo; <a href="../hipster_collection/CollectionEvents.html">CollectionEvents</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
         <div class="nav">
         
 </div>
 <div class="content">
-        <h2>Class
-            <strong>CollectionEvents</strong></h2>
+        <h2><strong>CollectionEvents</strong>
+          class
+        </h2>
         
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<pre class="source">
+class CollectionEvents implements Events {
+  CollectionEventList load_listeners, insert_listeners;
 
+  CollectionEvents() {
+    load_listeners = new CollectionEventList();
+    insert_listeners = new CollectionEventList();
+  }
+
+  CollectionEventList get load =&gt; load_listeners;
+  CollectionEventList get insert =&gt; insert_listeners;
+}
+</pre>
 </div>
 <h3>Implements</h3>
 <p>
-<span class="type-box"><span class="icon-interface"></span><a href="http://api.dartlang.org/html/Events.html" ref="external">Events</a></span></p>
+<span class="type-box"><span class="icon-class"></span><a href="../dart_html/Events.html">Events</a></span></p>
+<div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="CollectionEvents">
-<span class="show-code">Code</span>
+<button class="show-code">Code</button>
 new <strong>CollectionEvents</strong>() <a class="anchor-link" href="#CollectionEvents"
               title="Permalink to CollectionEvents.CollectionEvents">#</a></h4>
 <div class="doc">
-
 <pre class="source">
 CollectionEvents() {
   load_listeners = new CollectionEventList();
@@ -44,59 +64,78 @@ CollectionEvents() {
 </pre>
 </div>
 </div>
-<h3>Methods</h3>
-<div class="method"><h4 id="get:insert">
-<span class="show-code">Code</span>
-<a href="../hipster_collection/CollectionEventList.html">CollectionEventList</a> <strong>get insert</strong>() <a class="anchor-link" href="#get:insert"
-              title="Permalink to CollectionEvents.get insert">#</a></h4>
-<div class="doc">
-
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="insert">
+<button class="show-code">Code</button>
+final <a href="../hipster_collection/CollectionEventList.html">CollectionEventList</a>         <strong>insert</strong> <a class="anchor-link"
+            href="#insert"
+            title="Permalink to CollectionEvents.insert">#</a>
+        </h4>
+        <div class="doc">
 <pre class="source">
-CollectionEventList get insert() =&gt; insert_listeners;
+CollectionEventList get insert =&gt; insert_listeners;
 </pre>
 </div>
 </div>
-<div class="method"><h4 id="get:load">
-<span class="show-code">Code</span>
-<a href="../hipster_collection/CollectionEventList.html">CollectionEventList</a> <strong>get load</strong>() <a class="anchor-link" href="#get:load"
-              title="Permalink to CollectionEvents.get load">#</a></h4>
-<div class="doc">
-
-<pre class="source">
-CollectionEventList get load() =&gt; load_listeners;
-</pre>
-</div>
-</div>
-<h3>Fields</h3>
 <div class="field"><h4 id="insert_listeners">
-<span class="show-code">Code</span>
+<button class="show-code">Code</button>
 <a href="../hipster_collection/CollectionEventList.html">CollectionEventList</a>         <strong>insert_listeners</strong> <a class="anchor-link"
             href="#insert_listeners"
             title="Permalink to CollectionEvents.insert_listeners">#</a>
         </h4>
         <div class="doc">
-
 <pre class="source">
 CollectionEventList load_listeners, insert_listeners;
 </pre>
 </div>
 </div>
+<div class="field"><h4 id="load">
+<button class="show-code">Code</button>
+final <a href="../hipster_collection/CollectionEventList.html">CollectionEventList</a>         <strong>load</strong> <a class="anchor-link"
+            href="#load"
+            title="Permalink to CollectionEvents.load">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+CollectionEventList get load =&gt; load_listeners;
+</pre>
+</div>
+</div>
 <div class="field"><h4 id="load_listeners">
-<span class="show-code">Code</span>
+<button class="show-code">Code</button>
 <a href="../hipster_collection/CollectionEventList.html">CollectionEventList</a>         <strong>load_listeners</strong> <a class="anchor-link"
             href="#load_listeners"
             title="Permalink to CollectionEvents.load_listeners">#</a>
         </h4>
         <div class="doc">
-
 <pre class="source">
 CollectionEventList load_listeners, insert_listeners;
 </pre>
 </div>
 </div>
+</div>
+<div class="inherited">
+<h3>Operators</h3>
+<div class="method inherited"><h4 id="[]">
+<button class="show-code">Code</button>
+EventListenerList <strong>operator []</strong>(String type) <a class="anchor-link" href="#[]"
+              title="Permalink to CollectionEvents.operator []">#</a></h4>
+<div class="inherited-from">inherited from Events </div><div class="doc">
+<pre class="source">
+EventListenerList operator [](String type);
+</pre>
+</div>
+</div>
+</div>
         </div>
         <div class="clear"></div>
         </div>
-        <div class="footer"></div>
+        
+        <div class="footer">
+          <div>This page was generated at 2012-11-02 23:56:22.102</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
         </body></html>
         

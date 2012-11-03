@@ -15,7 +15,6 @@ body {
 h2 {
   font: 400 28px/44px 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande',
       sans-serif;
-  margin: 0 0 22px 0;
 }
 
 h3 {
@@ -33,7 +32,7 @@ h4 {
 p {
   font-size: 16px;
   line-height: 22px;
-  margin: 22px 0;
+  margin: 0 0 22px 0;
 }
 
 h3 + p {
@@ -52,7 +51,8 @@ pre, code {
   margin: 22px 0;
   padding: 0 4px;
   border-radius: 4px;
-  overflow: hidden;
+  overflow-x:auto;
+  overflow-y:hidden;
 }
 
 a {
@@ -98,6 +98,8 @@ hr + h2 {
 
   background-image: url('content-bg.png');
   background-repeat: repeat-y;
+
+  position: relative;
 }
 
 .header {
@@ -127,7 +129,66 @@ hr + h2 {
 .header #search-box {
   display: inline;
   float: right;
-  margin-right: 22px;
+  margin-right: 11px;
+}
+
+.search-input, .drop-down {
+  font: 400 13px/22px 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande',
+      sans-serif;
+  width: 300px;
+}
+
+.drop-down {
+  visibility: hidden;
+  z-index: 1000;
+  position: absolute;
+  right: 10px;
+  top: 36px;
+  border: 1px #CCC solid;
+  background-color: white;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.drop-down-table {
+  width: 100%;
+}
+
+.drop-down-link-tr {
+  padding: 4px 0px;
+  cursor: pointer;
+}
+.drop-down-link-td {
+  border-bottom: 1px solid #EEE;
+}
+
+.drop-down-link-tr:hover {
+  background: #EEE;
+  color: #333;
+}
+
+.drop-down-link-select {
+  background: #15C;
+  color: white;
+}
+
+.drop-down-link-select:hover {
+  background: #2AF;
+  color: white;
+}
+
+.drop-down-link-kind, .drop-down-link-library {
+  font: 400 10px/10px 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande',
+      sans-serif;
+}
+
+.drop-down-link-library {
+  text-align: right;
+}
+
+.drop-down-link-highlight {
+  font-weight:bold;
 }
 
 .nav {
@@ -231,11 +292,32 @@ ul.icon ul {
       sans-serif;
 }
 
+.inherited {
+}
+
+.inherited-from {
+  font: 400 13px/22px 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande',
+      sans-serif;
+  text-align: right;
+  opacity: 0.7;
+}
+
+.inherited-from, .docs-inherited-from {
+  font: 400 13px/22px 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande',
+      sans-serif;
+  text-align: right;
+  opacity: 0.7;
+}
+
+.docs-inherited-from {
+  margin-top: -22px;
+}
+
 .method .doc,
 .field .doc {
   padding-left: 44px;
   /* Ensure there is some space between members with no documentation. */
-  min-height: 22px;
+  margin-bottom: 22px;
 }
 
 .param {
@@ -277,11 +359,14 @@ ul.icon ul {
 }
 
 /* Only show the "code" link for the highlighted member. */
-.show-code {
+.show-code, .show-inherited {
   float: right;
-  font: 600 11px/22px 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande',
+  font: 600 11px 'Open Sans', 'Lucida Sans Unicode', 'Lucida Grande',
       sans-serif;
-  padding-left: 6px; /* In case it gets too close to the member. */
+  padding: 0 0 0 6px; /* In case it gets too close to the member. */
+  border: none;
+  background: transparent;
+  margin: 0;
 }
 
 .method:hover .show-code,
@@ -310,14 +395,20 @@ pre.source.expanded {
 
 /* Links that don't cause a page refresh. */
 .anchor-link, .anchor-link:visited,
-.show-code, .show-code:visited {
+.show-code, .show-code:visited,
+.show-inherited, .show-inherited:visited {
   color: hsl(40, 100%, 40%);
-  display: none;
   cursor: pointer;
 }
 
+.anchor-link, .anchor-link:visited,
+.show-code, .show-code:visited {
+  display: none;
+}
+
 .anchor-link:hover,
-.show-code:hover {
+.show-code:hover,
+.show-inherited:hover {
   color: hsl(40, 100%, 60%);
 }
 

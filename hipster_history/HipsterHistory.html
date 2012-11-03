@@ -2,50 +2,76 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>Library hipster_history / Class HipsterHistory</title>
+        <title>HipsterHistory class / hipster_history Library / Hipster MVC</title>
         <link rel="stylesheet" type="text/css"
-            href="../styles.css" />
+            href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
-        <link rel="shortcut icon" href="../favicon.ico" />
-        <script src="../client-live-nav.js"></script>
+        <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
         <body data-library="hipster_history" data-type="HipsterHistory">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
-          <a href="../index.html">Hipster MVC Documentation</a>
-         &rsaquo; <a href="../hipster_history.html">hipster_history</a> &rsaquo; <a href="../hipster_history/HipsterHistory.html">HipsterHistory</a></div>
+          <a href="../index.html">Hipster MVC</a>
+         &rsaquo; <a href="../hipster_history.html">hipster_history</a> &rsaquo; <a href="../hipster_history/HipsterHistory.html">HipsterHistory</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
         <div class="nav">
         
 </div>
 <div class="content">
-        <h2>Class
-            <strong>HipsterHistory</strong></h2>
+        <h2><strong>HipsterHistory</strong>
+          class
+        </h2>
         
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-
-</div>
-<h3>Static Methods</h3>
-<div class="method"><h4 id="route">
-<span class="show-code">Code</span>
-<strong>route</strong>(route, fn) <a class="anchor-link" href="#route"
-              title="Permalink to HipsterHistory.route">#</a></h4>
-<div class="doc">
-
 <pre class="source">
-static route(route, fn) {
-  routes.add([route, fn]);
+class HipsterHistory {
+  static List _routes;
+
+  static get routes() {
+    if (_routes == null) _routes = [];
+    return _routes;
+  }
+
+  static route(route, fn) {
+    routes.add([route, fn]);
+  }
+
+  static startHistory() {
+    window.on.popState.add(_checkUrl);
+  }
+
+  static _checkUrl(_) {
+    var fragment = window.location.hash.replaceFirst('#', '');
+
+    var matching_handlers = routes.
+      filter((r) =&gt; r[0].hasMatch(fragment));
+
+    if (matching_handlers.isEmpty()) return;
+
+    var handler = matching_handlers[0];
+    handler[1](fragment);
+  }
 }
 </pre>
 </div>
-</div>
-<div class="method"><h4 id="get:routes">
-<span class="show-code">Code</span>
-<strong>get routes</strong>() <a class="anchor-link" href="#get:routes"
-              title="Permalink to HipsterHistory.get routes">#</a></h4>
-<div class="doc">
-
+<div>
+<h3>Static Properties</h3>
+<div class="field"><h4 id="routes">
+<button class="show-code">Code</button>
+final         <strong>routes</strong> <a class="anchor-link"
+            href="#routes"
+            title="Permalink to HipsterHistory.routes">#</a>
+        </h4>
+        <div class="doc">
 <pre class="source">
 static get routes() {
   if (_routes == null) _routes = [];
@@ -54,12 +80,26 @@ static get routes() {
 </pre>
 </div>
 </div>
+</div>
+<div>
+<h3>Static Methods</h3>
+<div class="method"><h4 id="route">
+<button class="show-code">Code</button>
+<strong>route</strong>(route, fn) <a class="anchor-link" href="#route"
+              title="Permalink to HipsterHistory.route">#</a></h4>
+<div class="doc">
+<pre class="source">
+static route(route, fn) {
+  routes.add([route, fn]);
+}
+</pre>
+</div>
+</div>
 <div class="method"><h4 id="startHistory">
-<span class="show-code">Code</span>
+<button class="show-code">Code</button>
 <strong>startHistory</strong>() <a class="anchor-link" href="#startHistory"
               title="Permalink to HipsterHistory.startHistory">#</a></h4>
 <div class="doc">
-
 <pre class="source">
 static startHistory() {
   window.on.popState.add(_checkUrl);
@@ -67,9 +107,14 @@ static startHistory() {
 </pre>
 </div>
 </div>
+</div>
         </div>
         <div class="clear"></div>
         </div>
-        <div class="footer"></div>
+        
+        <div class="footer">
+          <div>This page was generated at 2012-11-02 23:56:22.239</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
         </body></html>
         

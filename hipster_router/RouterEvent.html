@@ -2,36 +2,256 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>Library hipster_router / Class RouterEvent</title>
+        <title>RouterEvent class / hipster_router Library / Hipster MVC</title>
         <link rel="stylesheet" type="text/css"
-            href="../styles.css" />
+            href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
-        <link rel="shortcut icon" href="../favicon.ico" />
-        <script src="../client-live-nav.js"></script>
+        <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
         <body data-library="hipster_router" data-type="RouterEvent">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
-          <a href="../index.html">Hipster MVC Documentation</a>
-         &rsaquo; <a href="../hipster_router.html">hipster_router</a> &rsaquo; <a href="../hipster_router/RouterEvent.html">RouterEvent</a></div>
+          <a href="../index.html">Hipster MVC</a>
+         &rsaquo; <a href="../hipster_router.html">hipster_router</a> &rsaquo; <a href="../hipster_router/RouterEvent.html">RouterEvent</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
         <div class="nav">
         
 </div>
 <div class="content">
-        <h2>Class
-            <strong>RouterEvent</strong></h2>
+        <h2><strong>RouterEvent</strong>
+          class
+        </h2>
         
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
-
+<pre class="source">
+class RouterEvent implements Event {}
+</pre>
 </div>
 <h3>Implements</h3>
 <p>
-<span class="type-box"><span class="icon-interface"></span><a href="http://api.dartlang.org/html/Event.html" ref="external">Event</a></span></p>
+<span class="type-box"><span class="icon-class"></span><a href="../dart_html/Event.html">Event</a></span></p>
+<div class="inherited">
+<h3>Properties</h3>
+<div class="field inherited"><h4 id="bubbles">
+<button class="show-code">Code</button>
+final bool         <strong>bubbles</strong> <a class="anchor-link"
+            href="#bubbles"
+            title="Permalink to RouterEvent.bubbles">#</a>
+        </h4>
+        <div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.bubbles</p>
+<pre class="source">
+bool get bubbles;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="cancelable">
+<button class="show-code">Code</button>
+final bool         <strong>cancelable</strong> <a class="anchor-link"
+            href="#cancelable"
+            title="Permalink to RouterEvent.cancelable">#</a>
+        </h4>
+        <div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.cancelable</p>
+<pre class="source">
+bool get cancelable;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="cancelBubble">
+<button class="show-code">Code</button>
+bool         <strong>cancelBubble</strong> <a class="anchor-link"
+            href="#cancelBubble"
+            title="Permalink to RouterEvent.cancelBubble">#</a>
+        </h4>
+        <div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.cancelBubble</p>
+<pre class="source">
+bool cancelBubble;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="clipboardData">
+<button class="show-code">Code</button>
+final Clipboard         <strong>clipboardData</strong> <a class="anchor-link"
+            href="#clipboardData"
+            title="Permalink to RouterEvent.clipboardData">#</a>
+        </h4>
+        <div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.clipboardData</p>
+<pre class="source">
+Clipboard get clipboardData;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="currentTarget">
+<button class="show-code">Code</button>
+final EventTarget         <strong>currentTarget</strong> <a class="anchor-link"
+            href="#currentTarget"
+            title="Permalink to RouterEvent.currentTarget">#</a>
+        </h4>
+        <div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.currentTarget</p>
+<pre class="source">
+EventTarget get currentTarget;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="defaultPrevented">
+<button class="show-code">Code</button>
+final bool         <strong>defaultPrevented</strong> <a class="anchor-link"
+            href="#defaultPrevented"
+            title="Permalink to RouterEvent.defaultPrevented">#</a>
+        </h4>
+        <div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.defaultPrevented</p>
+<pre class="source">
+bool get defaultPrevented;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="eventPhase">
+<button class="show-code">Code</button>
+final int         <strong>eventPhase</strong> <a class="anchor-link"
+            href="#eventPhase"
+            title="Permalink to RouterEvent.eventPhase">#</a>
+        </h4>
+        <div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.eventPhase</p>
+<pre class="source">
+int get eventPhase;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="returnValue">
+<button class="show-code">Code</button>
+bool         <strong>returnValue</strong> <a class="anchor-link"
+            href="#returnValue"
+            title="Permalink to RouterEvent.returnValue">#</a>
+        </h4>
+        <div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.returnValue</p>
+<pre class="source">
+bool returnValue;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="srcElement">
+<button class="show-code">Code</button>
+final EventTarget         <strong>srcElement</strong> <a class="anchor-link"
+            href="#srcElement"
+            title="Permalink to RouterEvent.srcElement">#</a>
+        </h4>
+        <div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.srcElement</p>
+<pre class="source">
+EventTarget get srcElement;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="target">
+<button class="show-code">Code</button>
+final EventTarget         <strong>target</strong> <a class="anchor-link"
+            href="#target"
+            title="Permalink to RouterEvent.target">#</a>
+        </h4>
+        <div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.target</p>
+<pre class="source">
+EventTarget get target;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="timeStamp">
+<button class="show-code">Code</button>
+final int         <strong>timeStamp</strong> <a class="anchor-link"
+            href="#timeStamp"
+            title="Permalink to RouterEvent.timeStamp">#</a>
+        </h4>
+        <div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.timeStamp</p>
+<pre class="source">
+int get timeStamp;
+</pre>
+</div>
+</div>
+<div class="field inherited"><h4 id="type">
+<button class="show-code">Code</button>
+final String         <strong>type</strong> <a class="anchor-link"
+            href="#type"
+            title="Permalink to RouterEvent.type">#</a>
+        </h4>
+        <div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.type</p>
+<pre class="source">
+String get type;
+</pre>
+</div>
+</div>
+</div>
+<div class="inherited">
+<h3>Methods</h3>
+<div class="method inherited"><h4 id="preventDefault">
+<button class="show-code">Code</button>
+void <strong>preventDefault</strong>() <a class="anchor-link" href="#preventDefault"
+              title="Permalink to RouterEvent.preventDefault">#</a></h4>
+<div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.preventDefault</p>
+<pre class="source">
+void preventDefault();
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="stopImmediatePropagation">
+<button class="show-code">Code</button>
+void <strong>stopImmediatePropagation</strong>() <a class="anchor-link" href="#stopImmediatePropagation"
+              title="Permalink to RouterEvent.stopImmediatePropagation">#</a></h4>
+<div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.stopImmediatePropagation</p>
+<pre class="source">
+void stopImmediatePropagation();
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="stopPropagation">
+<button class="show-code">Code</button>
+void <strong>stopPropagation</strong>() <a class="anchor-link" href="#stopPropagation"
+              title="Permalink to RouterEvent.stopPropagation">#</a></h4>
+<div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.stopPropagation</p>
+<pre class="source">
+void stopPropagation();
+</pre>
+</div>
+</div>
+<div class="method inherited"><h4 id="$dom_initEvent">
+<button class="show-code">Code</button>
+void <strong>$dom_initEvent</strong>(String eventTypeArg, bool canBubbleArg, bool cancelableArg) <a class="anchor-link" href="#$dom_initEvent"
+              title="Permalink to RouterEvent.$dom_initEvent">#</a></h4>
+<div class="inherited-from">inherited from Event </div><div class="doc">
+<p>@domName Event.initEvent</p>
+<pre class="source">
+void $dom_initEvent(String eventTypeArg, bool canBubbleArg, bool cancelableArg);
+</pre>
+</div>
+</div>
+</div>
         </div>
         <div class="clear"></div>
         </div>
-        <div class="footer"></div>
+        
+        <div class="footer">
+          <div>This page was generated at 2012-11-02 23:56:22.264</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
         </body></html>
         

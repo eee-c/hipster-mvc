@@ -2,38 +2,141 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>Library hipster_router / Class HipsterRouter</title>
+        <title>HipsterRouter class / hipster_router Library / Hipster MVC</title>
         <link rel="stylesheet" type="text/css"
-            href="../styles.css" />
+            href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
-        <link rel="shortcut icon" href="../favicon.ico" />
-        <script src="../client-live-nav.js"></script>
+        <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
         <body data-library="hipster_router" data-type="HipsterRouter">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
-          <a href="../index.html">Hipster MVC Documentation</a>
-         &rsaquo; <a href="../hipster_router.html">hipster_router</a> &rsaquo; <a href="../hipster_router/HipsterRouter.html">HipsterRouter</a></div>
+          <a href="../index.html">Hipster MVC</a>
+         &rsaquo; <a href="../hipster_router.html">hipster_router</a> &rsaquo; <a href="../hipster_router/HipsterRouter.html">HipsterRouter</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
         <div class="nav">
         
 </div>
 <div class="content">
-        <h2>Class
-            <strong>HipsterRouter</strong></h2>
+        <h2><strong>HipsterRouter</strong>
+          class
+        </h2>
         
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<pre class="source">
+class HipsterRouter {
+  /**
+   * The router exposes named events on which listeners can wait. For example,
+   * if the router has a "page" route, the event will be available on the
+   * 'route:page' event:
+   *
+   *     HipsterRouter app = new MyRouter();
+   *       app.
+   *         on['route:page'].
+   *         add((num) {
+   *           print("Routed to page: $num");
+   *         });
+   */
+  RouterEvents on;
 
+  /**
+   * Application routers must subclass [HipsterRouter], definining at least the
+   * [routes] getter:
+   *
+   *     class MyRouter extends HipsterRouter {
+   *       List get routes() =&gt;
+   *         [
+   *           ['page/:num', pageNum, 'page']
+   *         ];
+   *       //
+   *       pageNum(num) {
+   *         var el = document.query('body');
+   *          el.innerHTML = _pageNumTemplate(num);
+   *       }
+   *     }
+   *
+   * Start the router by creating an instance of the routing class and by
+   * telling [HipsterHistory] to start listening for pushState events:
+   *
+   *      HipsterRouter app = new MyRouter();
+   *      HipsterHistory.startHistory();
+   */
+  HipsterRouter() {
+    on = new RouterEvents();
+    this._initializeRoutes();
+  }
+
+  /**
+   * As shown in the constructor example, each route must include three values:
+   *
+   * * A string representation of the route, which can include placeholders (e.g. "page:num")
+   * * The method to be invoked when the route is matched
+   * * A string that names the event that is generated for [on].
+   */
+  List get routes() =&gt; [];
+
+  _initializeRoutes() {
+    routes.forEach((route) {
+      HipsterHistory.route(_routeToRegExp(route[0]), (fragment) {
+        Match params = _routeToRegExp(route[0]).firstMatch(fragment);
+        String event_name = (route.length == 3) ? "route:${route[2]}" : "default";
+        if (params.groupCount() == 0) {
+          route[1]();
+          this.on[event_name].dispatch();
+        }
+        else if (params.groupCount() == 1) {
+          route[1](params[1]);
+          this.on[event_name].dispatch(params[1]);
+        }
+        else if (params.groupCount() == 2) {
+          route[1](params[1], params[2]);
+          this.on[event_name].dispatch(params[1], params[2]);
+        }
+        else if (params.groupCount() == 3) {
+          route[1](params[1], params[2], params[3]);
+          this.on[event_name].dispatch(params[1], params[2], params[3]);
+        }
+        else {
+          throw new WrongArgumentCountException();
+        }
+      });
+    });
+  }
+
+  _routeToRegExp(matcher) {
+    var bits = matcher.split('/').map((chunk) {
+      if (chunk.startsWith(':')) return '([^\/]+)';
+      return chunk;
+    });
+
+    var regex = '';
+    for (var bit in bits) {
+      regex += bit;
+      regex += '/';
+    }
+    return new RegExp(regex.substring(0, regex.length-1));
+  }
+}
+</pre>
 </div>
+<div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="HipsterRouter">
-<span class="show-code">Code</span>
+<button class="show-code">Code</button>
 new <strong>HipsterRouter</strong>() <a class="anchor-link" href="#HipsterRouter"
               title="Permalink to HipsterRouter.HipsterRouter">#</a></h4>
 <div class="doc">
-<p>Application routers must subclass <a class="crossref" href="../hipster_router/HipsterRouter.html">HipsterRouter</a>, definining at least the
-<a class="crossref" href="../hipster_router/HipsterRouter.html#get:routes">routes</a> getter:</p>
+<p>Application routers must subclass <a class="crossref" href="../hipster_router/HipsterRouter.html#HipsterRouter">HipsterRouter</a>, definining at least the
+<a class="crossref" href="../hipster_router/HipsterRouter.html#routes">routes</a> getter:</p>
 <pre><code>class MyRouter extends HipsterRouter {
   List get routes() =&gt;
     [
@@ -48,8 +151,8 @@ new <strong>HipsterRouter</strong>() <a class="anchor-link" href="#HipsterRouter
 </code></pre>
 <p>Start the router by creating an instance of the routing class and by
 telling <code>HipsterHistory</code> to start listening for pushState events:</p>
-<pre><code>HipsterRouter app = new MyRouter();
-HipsterHistory.startHistory();
+<pre><code> HipsterRouter app = new MyRouter();
+ HipsterHistory.startHistory();
 </code></pre>
 <pre class="source">
 HipsterRouter() {
@@ -59,21 +162,11 @@ HipsterRouter() {
 </pre>
 </div>
 </div>
-<h3>Methods</h3>
-<div class="method"><h4 id="get:routes">
-<span class="show-code">Code</span>
-<a href="http://api.dartlang.org/dart_core/List.html" ref="external">List</a> <strong>get routes</strong>() <a class="anchor-link" href="#get:routes"
-              title="Permalink to HipsterRouter.get routes">#</a></h4>
-<div class="doc">
-<p>As shown in the constructor example, each route must include three values:</p><ul><li>A string representation of the route, which can include placeholders (e.g. "page:num")</li><li>The method to be invoked when the route is matched</li><li>A string that names the event that is generated for <a class="crossref" href="../hipster_router/HipsterRouter.html#on">on</a>.</li></ul>
-<pre class="source">
-List get routes() =&gt; [];
-</pre>
 </div>
-</div>
-<h3>Fields</h3>
+<div>
+<h3>Properties</h3>
 <div class="field"><h4 id="on">
-<span class="show-code">Code</span>
+<button class="show-code">Code</button>
 <a href="../hipster_router/RouterEvents.html">RouterEvents</a>         <strong>on</strong> <a class="anchor-link"
             href="#on"
             title="Permalink to HipsterRouter.on">#</a>
@@ -94,9 +187,27 @@ RouterEvents on;
 </pre>
 </div>
 </div>
+<div class="field"><h4 id="routes">
+<button class="show-code">Code</button>
+final List         <strong>routes</strong> <a class="anchor-link"
+            href="#routes"
+            title="Permalink to HipsterRouter.routes">#</a>
+        </h4>
+        <div class="doc">
+<p>As shown in the constructor example, each route must include three values:</p><ul><li>A string representation of the route, which can include placeholders (e.g. "page:num")</li><li>The method to be invoked when the route is matched</li><li>A string that names the event that is generated for <a class="crossref" href="../hipster_router/HipsterRouter.html#on">on</a>.</li></ul>
+<pre class="source">
+List get routes() =&gt; [];
+</pre>
+</div>
+</div>
+</div>
         </div>
         <div class="clear"></div>
         </div>
-        <div class="footer"></div>
+        
+        <div class="footer">
+          <div>This page was generated at 2012-11-02 23:56:22.275</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
         </body></html>
         

@@ -2,40 +2,65 @@
         <html>
         <head>
                 <meta charset="utf-8">
-        <title>Library hipster_model / Class ModelEventList</title>
+        <title>ModelEventList class / hipster_model Library / Hipster MVC</title>
         <link rel="stylesheet" type="text/css"
-            href="../styles.css" />
+            href="../styles.css">
         <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
-        <link rel="shortcut icon" href="../favicon.ico" />
-        <script src="../client-live-nav.js"></script>
+        <link rel="shortcut icon" href="../favicon.ico">
         
         </head>
         <body data-library="hipster_model" data-type="ModelEventList">
         <div class="page">
         <div class="header">
           <a href="../index.html"><div class="logo"></div></a>
-          <a href="../index.html">Hipster MVC Documentation</a>
-         &rsaquo; <a href="../hipster_model.html">hipster_model</a> &rsaquo; <a href="../hipster_model/ModelEventList.html">ModelEventList</a></div>
+          <a href="../index.html">Hipster MVC</a>
+         &rsaquo; <a href="../hipster_model.html">hipster_model</a> &rsaquo; <a href="../hipster_model/ModelEventList.html">ModelEventList</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
         <div class="nav">
         
 </div>
 <div class="content">
-        <h2>Class
-            <strong>ModelEventList</strong></h2>
+        <h2><strong>ModelEventList</strong>
+          class
+        </h2>
         
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
 <div class="doc">
+<pre class="source">
+class ModelEventList implements EventListenerList {
+  var listeners;
 
+  ModelEventList() {
+    listeners = [];
+  }
+
+  add(fn, {bool useCapture}) {
+    listeners.add(fn);
+  }
+
+  bool dispatch(Event event) {
+    listeners.forEach((fn) {fn(event);});
+    return true;
+  }
+}
+</pre>
 </div>
 <h3>Implements</h3>
 <p>
-<span class="type-box"><span class="icon-interface"></span><a href="http://api.dartlang.org/html/EventListenerList.html" ref="external">EventListenerList</a></span></p>
+<span class="type-box"><span class="icon-class"></span><a href="../dart_html/EventListenerList.html">EventListenerList</a></span></p>
+<div>
 <h3>Constructors</h3>
 <div class="method"><h4 id="ModelEventList">
-<span class="show-code">Code</span>
+<button class="show-code">Code</button>
 new <strong>ModelEventList</strong>() <a class="anchor-link" href="#ModelEventList"
               title="Permalink to ModelEventList.ModelEventList">#</a></h4>
 <div class="doc">
-
 <pre class="source">
 ModelEventList() {
   listeners = [];
@@ -43,26 +68,41 @@ ModelEventList() {
 </pre>
 </div>
 </div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="listeners">
+<button class="show-code">Code</button>
+var         <strong>listeners</strong> <a class="anchor-link"
+            href="#listeners"
+            title="Permalink to ModelEventList.listeners">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+var listeners;
+</pre>
+</div>
+</div>
+</div>
+<div>
 <h3>Methods</h3>
 <div class="method"><h4 id="add">
-<span class="show-code">Code</span>
-<strong>add</strong>(fn) <a class="anchor-link" href="#add"
+<button class="show-code">Code</button>
+<strong>add</strong>(fn, [bool useCapture]) <a class="anchor-link" href="#add"
               title="Permalink to ModelEventList.add">#</a></h4>
 <div class="doc">
-
 <pre class="source">
-add(fn) {
+add(fn, {bool useCapture}) {
   listeners.add(fn);
 }
 </pre>
 </div>
 </div>
 <div class="method"><h4 id="dispatch">
-<span class="show-code">Code</span>
-<a href="http://api.dartlang.org/dart_core/bool.html" ref="external">bool</a> <strong>dispatch</strong>(<a href="http://api.dartlang.org/html/Event.html" ref="external">Event</a> event) <a class="anchor-link" href="#dispatch"
+<button class="show-code">Code</button>
+bool <strong>dispatch</strong>(Event event) <a class="anchor-link" href="#dispatch"
               title="Permalink to ModelEventList.dispatch">#</a></h4>
 <div class="doc">
-
 <pre class="source">
 bool dispatch(Event event) {
   listeners.forEach((fn) {fn(event);});
@@ -71,23 +111,24 @@ bool dispatch(Event event) {
 </pre>
 </div>
 </div>
-<h3>Fields</h3>
-<div class="field"><h4 id="listeners">
-<span class="show-code">Code</span>
-var         <strong>listeners</strong> <a class="anchor-link"
-            href="#listeners"
-            title="Permalink to ModelEventList.listeners">#</a>
-        </h4>
-        <div class="doc">
-
+<div class="method inherited"><h4 id="remove">
+<button class="show-code">Code</button>
+EventListenerList <strong>remove</strong>(EventListener handler, [bool useCapture]) <a class="anchor-link" href="#remove"
+              title="Permalink to ModelEventList.remove">#</a></h4>
+<div class="inherited-from">inherited from EventListenerList </div><div class="doc">
 <pre class="source">
-var listeners;
+EventListenerList remove(EventListener handler, [bool useCapture]);
 </pre>
+</div>
 </div>
 </div>
         </div>
         <div class="clear"></div>
         </div>
-        <div class="footer"></div>
+        
+        <div class="footer">
+          <div>This page was generated at 2012-11-02 23:56:22.242</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
         </body></html>
         
