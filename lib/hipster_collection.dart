@@ -1,10 +1,10 @@
-#library('hipster_collection');
+library hipster_collection;
 
-#import('dart:html');
-#import('dart:json');
+import 'dart:html';
+import 'dart:json';
 
-#import('hipster_model.dart');
-#import('hipster_sync.dart');
+import 'hipster_model.dart';
+import 'hipster_sync.dart';
 
 class HipsterCollection implements Collection {
   CollectionEvents on;
@@ -107,7 +107,7 @@ class CollectionEventList implements EventListenerList {
     listeners = [];
   }
 
-  CollectionEventList add(fn, {bool useCapture}) {
+  CollectionEventList add(fn, [bool useCapture]) {
     listeners.add(fn);
     return this;
   }

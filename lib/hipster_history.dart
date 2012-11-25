@@ -1,6 +1,6 @@
-#library('hipster_history');
+library hipster_history;
 
-#import('dart:html');
+import 'dart:html';
 
 class HipsterHistory {
   static List _routes;

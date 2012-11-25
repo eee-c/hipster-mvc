@@ -1,8 +1,8 @@
-#library('hipster_router');
+library hipster_router;
 
-#import("dart:html");
+import "dart:html";
 
-#import("hipster_history.dart");
+import "hipster_history.dart";
 
 class HipsterRouter {
   /**

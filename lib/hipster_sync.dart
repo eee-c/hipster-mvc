@@ -1,7 +1,7 @@
-#library('hipster_sync');
+library hipster_sync;
 
-#import('dart:html');
-#import('dart:json');
+import 'dart:html';
+import 'dart:json';
 
 //typedef Future<HashMap> SyncCallback(String method, dynamic model);
 

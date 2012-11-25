@@ -1,9 +1,9 @@
-#library('hipster_model');
+library hipster_model;
 
-#import('dart:html');
-#import('dart:json');
+import 'dart:html';
+import 'dart:json';
 
-#import('hipster_sync.dart');
+import 'hipster_sync.dart';
 
 /** HipsterModel encapsulates individual records in your backend datastore. At
  * its most concise, a model need only to implement the [urlRoot] method:
@@ -160,7 +160,7 @@ class ModelEventList implements EventListenerList {
     listeners = [];
   }
 
-  add(fn, {bool useCapture}) {
+  add(fn, [bool useCapture]) {
     listeners.add(fn);
   }
 
