@@ -36,7 +36,7 @@ class HipsterModel implements Hashable {
 
   // TODO: better hashing function (delimited keys and values?)
   static String hash() {
-    return (new Date.now()).value.hashCode().toRadixString(16);
+    return (new Date.now()).hashCode.toRadixString(16);
   }
 
   /**
@@ -160,7 +160,7 @@ class ModelEventList implements EventListenerList {
     listeners = [];
   }
 
-  add(fn, [bool useCapture]) {
+  add(fn, [bool useCapture=false]) {
     listeners.add(fn);
   }
 

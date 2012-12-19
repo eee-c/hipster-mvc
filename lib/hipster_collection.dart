@@ -30,7 +30,7 @@ class HipsterCollection implements Collection {
   map(fn) => models.map(fn);
   filter(fn) => models.filter(fn);
   contains(element) => models.contains(element);
-  reduce(intialValue, fn) => models.reduce(initialValue, fn);
+  reduce(initialValue, fn) => models.reduce(initialValue, fn);
   every(fn) => models.every(fn);
   some(fn) => models.some(fn);
 
@@ -65,7 +65,7 @@ class HipsterCollection implements Collection {
       });
 
     after_save.
-      handleException(bool (e) {
+      handleException((e) {
         print("Exception handled: ${e}");
         return true;
       });
@@ -107,7 +107,7 @@ class CollectionEventList implements EventListenerList {
     listeners = [];
   }
 
-  CollectionEventList add(fn, [bool useCapture]) {
+  CollectionEventList add(fn, [bool useCapture=false]) {
     listeners.add(fn);
     return this;
   }
