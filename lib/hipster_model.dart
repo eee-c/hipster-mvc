@@ -3,6 +3,7 @@ library hipster_model;
 import 'dart:html';
 import 'dart:json';
 
+import 'hipster_collection.dart';
 import 'hipster_sync.dart';
 
 /** HipsterModel encapsulates individual records in your backend datastore. At
@@ -20,17 +21,16 @@ class HipsterModel implements Hashable {
    * broadcast events from this object.  See [ModelEvents] for the complete
    * list of events supported.
    */
-  ModelEvents on;
+  ModelEvents on = new ModelEvents();
 
   /** If the model is part of a collection, it will be stored here. */
-  Collection collection;
+  HipsterCollection collection;
 
   /**
    * If attributes is not supplied, it will be initalied to an empty
    * [HashMap].
    */
   HipsterModel([this.attributes]) {
-    on = new ModelEvents();
     if (attributes == null) attributes = {};
   }
 
@@ -135,33 +135,44 @@ class HipsterModel implements Hashable {
 class ModelEvent implements Event {
   var type, model;
   ModelEvent(this.type, this.model);
+
+  bool bubbles = false;
+  bool cancelable = false;
+  bool cancelBubble = false;
+  Clipboard clipboardData;
+  EventTarget currentTarget;
+  bool defaultPrevented = false;
+  int eventPhase;
+  bool returnValue = false;
+  EventTarget target;
+  int timeStamp;
+  void $dom_initEvent(String _a, bool _b, bool _c) {}
+  void preventDefault() {}
+  void stopImmediatePropagation() {}
+  void stopPropagation() {}
 }
 
 class ModelEvents implements Events {
-  var load_list;
-  var save_list;
-  var delete_list;
+  var load_list = new ModelEventList();
+  var save_list = new ModelEventList();
+  var delete_list = new ModelEventList();
 
-  ModelEvents() {
-    load_list = new ModelEventList();
-    save_list = new ModelEventList();
-    delete_list = new ModelEventList();
-  }
+  get load => load_list;
+  get save => save_list;
+  get delete => delete_list;
 
-  get load { return load_list; }
-  get save { return save_list; }
-  get delete { return delete_list; }
+  EventListenerList operator [](String type) => new ModelEventList();
 }
 
 class ModelEventList implements EventListenerList {
-  var listeners;
-
-  ModelEventList() {
-    listeners = [];
-  }
+  var listeners = [];
 
   add(fn, [bool useCapture=false]) {
     listeners.add(fn);
+  }
+
+  EventListenerList remove(EventListener listener, [bool useCapture=false]) {
+    throw UnsupportedError;
   }
 
   bool dispatch(Event event) {

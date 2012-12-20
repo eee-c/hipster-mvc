@@ -1,20 +1,13 @@
 library hipster_collection;
 
-import 'dart:html';
-import 'dart:json';
-
 import 'hipster_model.dart';
 import 'hipster_sync.dart';
+import 'hipster_events.dart';
 
-class HipsterCollection implements Collection {
-  CollectionEvents on;
-  List<HipsterModel> models;
+abstract class HipsterCollection implements Collection {
+  CollectionEvents on = new CollectionEvents();
+  List<HipsterModel> models = [];
   Map<String,Map> data;
-
-  HipsterCollection() {
-    on = new CollectionEvents();
-    models = <HipsterModel>[];
-  }
 
   HipsterModel modelMaker(attrs);
   String get url;
@@ -88,46 +81,26 @@ class HipsterCollection implements Collection {
   }
 }
 
-class CollectionEvents implements Events {
-  CollectionEventList load_listeners, insert_listeners;
-
-  CollectionEvents() {
-    load_listeners = new CollectionEventList();
-    insert_listeners = new CollectionEventList();
-  }
-
-  CollectionEventList get load => load_listeners;
-  CollectionEventList get insert => insert_listeners;
-}
-
-class CollectionEventList implements EventListenerList {
-  List listeners;
-
-  CollectionEventList() {
-    listeners = [];
-  }
-
-  CollectionEventList add(fn, [bool useCapture=false]) {
-    listeners.add(fn);
-    return this;
-  }
-
-  bool dispatch(CollectionEvent event) {
-    listeners.forEach((fn) {fn(event);});
-    return true;
-  }
-}
-
-class CollectionEvent implements Event {
-  String _type;
+class CollectionEvent extends HipsterEvent {
+  String type;
   HipsterCollection collection;
-  HipsterModel _model;
+  HipsterModel model;
 
-  CollectionEvent(this._type, this.collection, {model}) {
-    _model = model;
-  }
-
-  String get type =>_type;
-
-  HipsterModel get model => _model;
+  CollectionEvent(this.type, this.collection, {this.model});
 }
+
+class CollectionEvents extends HipsterEvents {
+  var load_listeners  = new CollectionEventListenerList(),
+      insert_listeners = new CollectionEventListenerList();
+
+  CollectionEventListenerList get load => load_listeners;
+  CollectionEventListenerList get insert => insert_listeners;
+
+  CollectionEventListenerList operator [](String type) {
+    if (type == 'load') return this.load;
+    if (type == 'insert') return this.insert;
+    return new CollectionEventListenerList();
+  }
+}
+
+class CollectionEventListenerList extends HipsterEventListenerList {}
