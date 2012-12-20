@@ -1,10 +1,8 @@
 library hipster_model;
 
-import 'dart:html';
-import 'dart:json';
-
 import 'hipster_collection.dart';
 import 'hipster_sync.dart';
+import 'hipster_events.dart';
 
 /** HipsterModel encapsulates individual records in your backend datastore. At
  * its most concise, a model need only to implement the [urlRoot] method:
@@ -132,51 +130,26 @@ class HipsterModel implements Hashable {
 
 }
 
-class ModelEvent implements Event {
+class ModelEvent extends HipsterEvent {
   var type, model;
   ModelEvent(this.type, this.model);
-
-  bool bubbles = false;
-  bool cancelable = false;
-  bool cancelBubble = false;
-  Clipboard clipboardData;
-  EventTarget currentTarget;
-  bool defaultPrevented = false;
-  int eventPhase;
-  bool returnValue = false;
-  EventTarget target;
-  int timeStamp;
-  void $dom_initEvent(String _a, bool _b, bool _c) {}
-  void preventDefault() {}
-  void stopImmediatePropagation() {}
-  void stopPropagation() {}
 }
 
-class ModelEvents implements Events {
-  var load_list = new ModelEventList();
-  var save_list = new ModelEventList();
-  var delete_list = new ModelEventList();
+class ModelEvents extends HipsterEvents {
+  var load_list = new ModelEventListenerList();
+  var save_list = new ModelEventListenerList();
+  var delete_list = new ModelEventListenerList();
 
   get load => load_list;
   get save => save_list;
   get delete => delete_list;
 
-  EventListenerList operator [](String type) => new ModelEventList();
-}
-
-class ModelEventList implements EventListenerList {
-  var listeners = [];
-
-  add(fn, [bool useCapture=false]) {
-    listeners.add(fn);
-  }
-
-  EventListenerList remove(EventListener listener, [bool useCapture=false]) {
-    throw UnsupportedError;
-  }
-
-  bool dispatch(Event event) {
-    listeners.forEach((fn) {fn(event);});
-    return true;
+  ModelEventListenerList operator [](String type) {
+    if (type == 'load') return this.load;
+    if (type == 'save') return this.save;
+    if (type == 'delete') return this.delete;
+    return new ModelEventListenerList();
   }
 }
+
+class ModelEventListenerList extends HipsterEventListenerList {}
