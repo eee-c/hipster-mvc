@@ -29,7 +29,7 @@ abstract class HipsterEventListenerList implements EventListenerList {
   }
 
   EventListenerList remove(EventListener listener, [bool useCapture=false]) {
-    throw UnsupportedError;
+    throw new UnsupportedError("Planned in a future release");
   }
 
   bool dispatch(Event event) {
