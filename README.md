@@ -4,7 +4,7 @@ The MVC library for Dart, inspired by Backbone.js and used extensively in the Pr
 
 [API Documentation](http://eee-c.github.com/hipster-mvc).
 
-[![](https://drone.io/eee-c/HispterMVC/status.png)](https://drone.io/eee-c/HispterMVC/latest)
+[![](https://drone.io/eee-c/HipsterMVC/status.png)](https://drone.io/eee-c/HipsterMVC/latest)
 
 ## Getting Started
 
