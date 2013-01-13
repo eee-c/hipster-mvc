@@ -1,18 +1,20 @@
-= Hipster MVC
+# Hipster MVC
 
 The MVC library for Dart, inspired by Backbone.js and used extensively in the Pragmatic Programmers book, "Dart for Hipsters".
 
-http://eee-c.github.com/hipster-mvc[API Documentation].
+[API Documentation](http://eee-c.github.com/hipster-mvc).
 
-== Getting Started
+[![](https://drone.io/eee-c/HispterMVC/status.png)](https://drone.io/eee-c/HispterMVC/latest)
 
-A fully functional sample app is available at https://github.com/eee-c/dart-comics[dart-comics].
+## Getting Started
+
+A fully functional sample app is available at [dart-comics](https://github.com/eee-c/dart-comics).
 
 Displaying a collection of resources is as simple as defining model, collection and collection view classes and then instantiating them:
 
-----
-#import('Collections.Comics.dart', prefix: 'Collections');
-#import('Views.Comics.dart', prefix: 'Views');
+````dart
+import 'Collections.Comics.dart' as 'Collections';
+import 'Views.Comics.dart' as 'Views';
 
 main() {
   var my_comics_collection = new Collections.Comics()
@@ -23,51 +25,51 @@ main() {
 
   my_comics_collection.fetch();
 }
-----
+````
 
 If the backend exposes a REST-like API, your collection and model classes can be very brief.
 
-=== A Collection Example
+### A Collection Example
 
-----
-#library('Collection class to describe my comic book collection');
+````dart
+library comics_collection;
 
-#import('package:hipster-mvc/HipsterCollection.dart');
+import 'package:hipster-mvc/HipsterCollection.dart';
 
-#import('Models.ComicBook.dart');
+import 'Models.ComicBook.dart';
 
 class Comics extends HipsterCollection {
   get url => '/comics';
   modelMaker(attrs) => new ComicBook(attrs);
 }
-----
+````
 
-=== A Model Example
+### A Model Example
 
-----
-#library('Model class describing a comic book');
+````dart
+library comic_book;
 
-#import('package:hipster-mvc/HipsterModel.dart');
+import 'package:hipster-mvc/HipsterModel.dart';
 
 class ComicBook extends HipsterModel {
   ComicBook(attributes) : super(attributes);
 }
-----
+````
 
-== History
+## History
 
  * `0.2.0` — New `import` / `library` support. Method signature for `EventListenerList#add` has changed again.
  * `0.1.0` — Initial release, ready for Dart M1.
 
-== More information
+## More information
 
 This grew out of a series of blog entries at: http://japhr.blogspot.com/search/label/dart
 
-== License
+## License
 
 This software is licensed under the MIT License.
 
-Copyright Chris Strom, 2012.
+Copyright Chris Strom, 2013.
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the
