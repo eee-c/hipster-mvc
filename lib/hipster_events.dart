@@ -6,7 +6,7 @@ abstract class HipsterEvent implements Event {
   bool bubbles = false;
   bool cancelable = false;
   bool cancelBubble = false;
-  Clipboard clipboardData;
+  DataTransfer clipboardData;
   EventTarget currentTarget;
   bool defaultPrevented = false;
   int eventPhase;
@@ -21,15 +21,11 @@ abstract class HipsterEvent implements Event {
 
 abstract class HipsterEvents implements Events {}
 
-abstract class HipsterEventListenerList implements EventListenerList {
+abstract class HipsterEventListenerList {
   var listeners = [];
 
   add(fn, [bool useCapture=false]) {
     listeners.add(fn);
-  }
-
-  EventListenerList remove(EventListener listener, [bool useCapture=false]) {
-    throw new UnsupportedError("Planned in a future release");
   }
 
   bool dispatch(Event event) {

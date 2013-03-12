@@ -1,5 +1,7 @@
 library hipster_collection;
 
+import 'dart:async';
+
 import 'hipster_model.dart';
 import 'hipster_sync.dart';
 import 'hipster_events.dart';
@@ -17,15 +19,13 @@ abstract class HipsterCollection implements Collection {
     models.forEach(fn);
   }
 
-  iterator() => models.iterator();
+  get iterator => models.iterator;
 
   bool get isEmpty => models.isEmpty;
   map(fn) => models.map(fn);
-  filter(fn) => models.filter(fn);
   contains(element) => models.contains(element);
   reduce(initialValue, fn) => models.reduce(initialValue, fn);
   every(fn) => models.every(fn);
-  some(fn) => models.some(fn);
 
   int get length => models.length;
 
@@ -58,7 +58,7 @@ abstract class HipsterCollection implements Collection {
       });
 
     after_save.
-      handleException((e) {
+      catchError((e) {
         print("Exception handled: ${e}");
         return true;
       });
@@ -96,7 +96,7 @@ class CollectionEvents extends HipsterEvents {
   CollectionEventListenerList get load => load_listeners;
   CollectionEventListenerList get insert => insert_listeners;
 
-  CollectionEventListenerList operator [](String type) {
+  operator [](String type) {
     if (type == 'load') return this.load;
     if (type == 'insert') return this.insert;
     return new CollectionEventListenerList();

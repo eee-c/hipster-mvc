@@ -6,11 +6,12 @@ class TestEventListenerList extends HipsterEventListenerList {}
 
 main() {
   group('unsupported', () {
+    // TODO: delete this (it doesn't do anything)
     test('remove', (){
       var it = new TestEventListenerList();
       expect(
         () => it.remove("foo"),
-        throwsUnsupportedError
+        throws
       );
     });
   });

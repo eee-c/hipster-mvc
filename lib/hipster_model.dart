@@ -1,5 +1,7 @@
 library hipster_model;
 
+import 'dart:async';
+
 import 'hipster_collection.dart';
 import 'hipster_sync.dart';
 import 'hipster_events.dart';
@@ -10,7 +12,7 @@ import 'hipster_events.dart';
  *       get urlRoot => '/comics';
  *     }
  */
-class HipsterModel implements Hashable {
+class HipsterModel {
   /** The internal representation of the record. */
   Map attributes;
 
@@ -34,7 +36,7 @@ class HipsterModel implements Hashable {
 
   // TODO: better hashing function (delimited keys and values?)
   static String hash() {
-    return (new Date.now()).hashCode.toRadixString(16);
+    return (new DateTime.now()).hashCode.toRadixString(16);
   }
 
   /**
@@ -97,8 +99,8 @@ class HipsterModel implements Hashable {
       });
 
     after_call.
-      handleException((e) {
-        completer.completeException(e);
+      catchError((e) {
+        completer.completeError(e);
         return true;
       });
 
@@ -144,7 +146,7 @@ class ModelEvents extends HipsterEvents {
   get save => save_list;
   get delete => delete_list;
 
-  ModelEventListenerList operator [](String type) {
+  operator [](String type) {
     if (type == 'load') return this.load;
     if (type == 'save') return this.save;
     if (type == 'delete') return this.delete;
