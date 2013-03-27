@@ -63,7 +63,7 @@ class HipsterSync {
         }
       });
 
-    request.open(verb, model.url, true);
+    request.open(verb, model.url);
 
     // Tell the server that we expect JSON!
     request.setRequestHeader("Accept", "application/json");
