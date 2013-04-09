@@ -24,7 +24,7 @@ abstract class HipsterCollection implements Collection {
   bool get isEmpty => models.isEmpty;
   map(fn) => models.map(fn);
   contains(element) => models.contains(element);
-  reduce(initialValue, fn) => models.reduce(initialValue, fn);
+  fold(initialValue, fn) => models.fold(initialValue, fn);
   every(fn) => models.every(fn);
 
   int get length => models.length;
