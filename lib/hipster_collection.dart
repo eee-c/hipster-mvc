@@ -6,7 +6,7 @@ import 'hipster_model.dart';
 import 'hipster_sync.dart';
 import 'hipster_events.dart';
 
-abstract class HipsterCollection implements Collection {
+abstract class HipsterCollection implements Iterable {
   CollectionEvents on = new CollectionEvents();
   List<HipsterModel> models = [];
   Map<String,Map> data;
