@@ -1,6 +1,8 @@
 library hipster_router;
 
 import "dart:html";
+import "dart:async";
+import "dart:collection";
 
 import "hipster_history.dart";
 
@@ -53,31 +55,31 @@ class HipsterRouter {
    * * The method to be invoked when the route is matched
    * * A string that names the event that is generated for [on].
    */
-  List get routes() => [];
+  List get routes => [];
 
   _initializeRoutes() {
     routes.forEach((route) {
       HipsterHistory.route(_routeToRegExp(route[0]), (fragment) {
         Match params = _routeToRegExp(route[0]).firstMatch(fragment);
         String event_name = (route.length == 3) ? "route:${route[2]}" : "default";
-        if (params.groupCount() == 0) {
+        if (params.groupCount == 0) {
           route[1]();
-          this.on[event_name].dispatch();
+          this.on.dispatch(event_name);
         }
-        else if (params.groupCount() == 1) {
+        else if (params.groupCount == 1) {
           route[1](params[1]);
-          this.on[event_name].dispatch(params[1]);
+          this.on.dispatch(event_name, params[1]);
         }
-        else if (params.groupCount() == 2) {
+        else if (params.groupCount == 2) {
           route[1](params[1], params[2]);
-          this.on[event_name].dispatch(params[1], params[2]);
+          this.on.dispatch(event_name, params[1], params[2]);
         }
-        else if (params.groupCount() == 3) {
+        else if (params.groupCount == 3) {
           route[1](params[1], params[2], params[3]);
-          this.on[event_name].dispatch(params[1], params[2], params[3]);
+          this.on.dispatch(event_name, params[1], params[2], params[3]);
         }
         else {
-          throw new WrongArgumentCountException();
+          throw new ArgumentError();
         }
       });
     });
@@ -99,34 +101,22 @@ class HipsterRouter {
 }
 
 class RouterEvents implements Events {
-  HashMap<String,RouterEventList> listener;
+  HashMap<String,StreamController> listener;
   RouterEvents() {
     listener = {};
   }
 
-  RouterEventList operator [](String type) {
-    listener.putIfAbsent(type, _buildListenerList);
-    return listener[type];
+  Stream operator [](String type) {
+    listener.putIfAbsent(type, _buildStream);
+    return listener[type].stream.asBroadcastStream();
   }
 
-  _buildListenerList() => new RouterEventList();
-}
+  get _buildStream => new StreamController();
 
-class RouterEventList implements EventListenerList {
-  List listeners;
-
-  RouterEventList() {
-    listeners = [];
-  }
-
-  RouterEventList add(EventListener handler, [bool useCapture]) {
-    listeners.add(handler);
-    return this;
-  }
-
-  bool dispatch(RouterEvent event) {
-    listeners.forEach((fn) {fn(event);});
-    return true;
+  void dispatch(String type, [arg1, arg2, arg3]) {
+    if (arg3 != null) listener[type].add([arg1, arg2, arg3]);
+    else if (arg2 != null) listener[type].add([arg1, arg2]);
+    else if (arg1 != null) listener[type].add([arg1]);
+    else listener[type].add([]);
   }
 }
-class RouterEvent implements Event {}

@@ -5,7 +5,7 @@ import 'dart:html';
 class HipsterHistory {
   static List _routes;
 
-  static get routes() {
+  static get routes {
     if (_routes == null) _routes = [];
     return _routes;
   }
@@ -15,7 +15,7 @@ class HipsterHistory {
   }
 
   static startHistory() {
-    window.on.popState.add(_checkUrl);
+    window.onPopState.listen(_checkUrl);
   }
 
   static _checkUrl(_) {

@@ -20,10 +20,32 @@ echo $results | grep -v 'Exception: Some tests failed.' >/dev/null
 echo
 echo "dartanalyzer lib/*.dart"
 
-dartanalyzer lib/*.dart
+dartanalyzer lib/hipster_collection.dart
 if [[ $? != 0 ]]; then
-  echo "$results"
   exit 1
 fi
 
-echo "$results"
+dartanalyzer lib/hipster_events.dart
+if [[ $? != 0 ]]; then
+  exit 1
+fi
+
+dartanalyzer lib/hipster_history.dart
+if [[ $? != 0 ]]; then
+  exit 1
+fi
+
+dartanalyzer lib/hipster_model.dart
+if [[ $? != 0 ]]; then
+  exit 1
+fi
+
+dartanalyzer lib/hipster_router.dart
+if [[ $? != 0 ]]; then
+  exit 1
+fi
+
+dartanalyzer lib/hipster_view.dart
+if [[ $? != 0 ]]; then
+  exit 1
+fi
