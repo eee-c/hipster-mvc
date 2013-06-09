@@ -5,7 +5,7 @@ set -e
 #####
 # Unit Tests
 
-echo "DumpRenderTree test/index.html"
+echo "content_shell --dump-render-tree test/index.html"
 results=`DumpRenderTree test/index.html 2>&1`
 
 echo "$results" | grep CONSOLE
@@ -18,14 +18,12 @@ echo $results | grep -v 'Exception: Some tests failed.' >/dev/null
 # Type Analysis
 
 echo
-echo "dart_analyzer lib/*.dart"
+echo "dartanalyzer lib/*.dart"
 
-results=`dart_analyzer lib/*.dart 2>&1`
+dartanalyzer lib/*.dart
+if [[ $? != 0 ]]; then
+  echo "$results"
+  exit 1
+fi
 
 echo "$results"
-
-if [ -n "$results" ]; then
-    exit 1
-else
-    echo "Passed analysis."
-fi

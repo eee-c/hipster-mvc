@@ -48,9 +48,8 @@ class HipsterSync {
         completer = new Completer();
 
     request.
-      on.
-      load.
-      add((event) {
+      onLoad.
+      listen((event) {
         HttpRequest req = event.target;
 
         if (req.status > 299) {
