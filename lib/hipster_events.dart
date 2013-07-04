@@ -11,6 +11,7 @@ abstract class HipsterEvent implements Event {
   bool defaultPrevented = false;
   int eventPhase;
   bool returnValue = false;
+  List<Node> path;
   EventTarget target;
   int timeStamp;
   void $dom_initEvent(String _a, bool _b, bool _c) {}
