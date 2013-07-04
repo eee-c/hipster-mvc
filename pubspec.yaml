@@ -5,3 +5,4 @@ author: Chris Strom <chris@eeecomputes.com>
 homepage: https://github.com/eee-c/hipster-mvc
 dependencies:
   unittest: any
+  js: any
