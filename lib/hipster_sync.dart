@@ -57,8 +57,7 @@ class HipsterSync {
             completeException("That ain't gonna work: ${req.status}");
         }
         else {
-          var json = JSON.parse(req.responseText);
-          completer.complete(json);
+          completer.complete(parseJson(req.responseText));
         }
       });
 
@@ -77,5 +76,10 @@ class HipsterSync {
     }
 
     return completer.future;
+  }
+
+  static parseJson(json) {
+    if (json.isEmpty) return {};
+    return JSON.parse(json);
   }
 }
