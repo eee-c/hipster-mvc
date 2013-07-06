@@ -19,7 +19,7 @@ hipster_sync_tests() {
       );
     });
 
-    skip_group("HTTP get", (){
+    group("HTTP get", (){
       test("it can parse responses", (){
         _test(response) {
           expect(response, {'foo': 1});
