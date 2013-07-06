@@ -20,8 +20,6 @@ echo "$results" | grep -v 'Exception: Some tests failed.' >/dev/null
 
 kill $server_pid
 
-exit 0
-
 #####
 # Type Analysis
 
