@@ -2,6 +2,7 @@ part of hipster_mvc_test;
 
 class FakeModel {
   String url = 'http://localhost:31337/test';
+  HashMap attributes;
 }
 
 hipster_sync_tests() {
@@ -27,6 +28,20 @@ hipster_sync_tests() {
 
         var model = new FakeModel();
         HipsterSync.call('get', model).then(expectAsync1(_test));
+      });
+    });
+
+    group("HTTP post", (){
+      test("it can POST new records", (){
+        _test(response) {
+          expect(response, containsPair('test', 42));
+        }
+
+        var model = new FakeModel();
+        model.url = 'http://localhost:31337/widgets';
+        model.attributes = {'test': 42};
+
+        HipsterSync.call('create', model).then(expectAsync1(_test));
       });
     });
   });

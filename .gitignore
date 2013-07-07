@@ -3,3 +3,5 @@ docs
 out
 packages
 pubspec.lock
+test/test.db
+test.db

@@ -19,6 +19,7 @@ echo "$results" | grep 'unittest-suite-success' >/dev/null
 echo "$results" | grep -v 'Exception: Some tests failed.' >/dev/null
 
 kill $server_pid
+rm -f test.db test/test.db
 
 #####
 # Type Analysis
