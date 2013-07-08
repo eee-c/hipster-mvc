@@ -4,6 +4,9 @@ import 'dart:json' as JSON;
 import 'package:dirty/dirty.dart';
 import 'package:uuid/uuid.dart';
 
+Uuid uuid = new Uuid();
+Dirty db = new Dirty('test.db');
+
 main() {
   var port = Platform.environment['PORT'] == null ?
     31337 : int.parse(Platform.environment['PORT']);
@@ -29,15 +32,14 @@ handleWidgets(req) {
       id = (id_path == null) ? null : id_path[1];
 
   if (req.method == 'POST') return createWidget(req);
-  if (req.method == 'GET' && id != null) readWidget(req);
+  if (req.method == 'GET' && id != null) return readWidget(id, req);
+  if (req.method == 'PUT' && id != null) return updateWidget(id, req);
 
   notFoundResponse(req);
 }
 
 createWidget(req) {
   HttpResponse res = req.response;
-  Uuid uuid = new Uuid();
-  Dirty db = new Dirty('test.db');
 
   req.toList().then((list) {
     var post_data = new String.fromCharCodes(list[0]);
@@ -55,9 +57,8 @@ createWidget(req) {
   });
 }
 
-readWidget(req) {
+readWidget(id, req) {
   HttpResponse res = req.response;
-  Dirty db = new Dirty('test.db');
 
   if (db[id] == null) return notFoundResponse(req);
 
@@ -68,8 +69,25 @@ readWidget(req) {
   res.close();
 }
 
-updateWidget(req) {
+updateWidget(id, req) {
+  HttpResponse res = req.response;
 
+  if (!db.containsKey(id)) return notFoundResponse(req);
+
+  req.
+    toList().
+    then((list) {
+      var data = list.expand((i)=>i),
+          body = new String.fromCharCodes(data),
+          widget = db[id] = JSON.parse(body);
+
+      res.statusCode = HttpStatus.OK;
+      res.headers.contentType =
+        new ContentType("application", "json", charset: "utf-8");
+
+      res.write(JSON.stringify(widget));
+      res.close();
+    });
 }
 
 

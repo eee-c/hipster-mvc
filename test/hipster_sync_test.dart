@@ -44,5 +44,39 @@ hipster_sync_tests() {
         HipsterSync.call('create', model).then(expectAsync1(_test));
       });
     });
+
+    group("HTTP put", (){
+      var model_id;
+
+      setUp((){
+        var completer = new Completer();
+
+        var model = new FakeModel();
+        model.url = 'http://localhost:31337/widgets';
+        model.attributes = {'test': 1};
+        HipsterSync.
+          call('create', model).
+          then((rec) {
+            model_id = rec['id'];
+            completer.complete();
+          });
+
+        return completer.future;
+      });
+
+      test("it can PUT on top of existing records", (){
+        var model = new FakeModel();
+        model.url = 'http://localhost:31337/widgets/${model_id}';
+        model.attributes = {'test': 42};
+
+        HipsterSync.
+          call('update', model).
+          then(
+            expectAsync1((response) {
+              expect(response, containsPair('test', 42));
+            })
+          );
+      });
+    });
   });
 }
