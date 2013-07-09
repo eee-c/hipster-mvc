@@ -45,15 +45,16 @@ hipster_sync_tests() {
       });
     });
 
-    group("HTTP put", (){
-      var model_id;
+    group('(w/ a pre-existing record)', (){
+      var model, model_id;
 
       setUp((){
         var completer = new Completer();
 
-        var model = new FakeModel();
-        model.url = 'http://localhost:31337/widgets';
-        model.attributes = {'test': 1};
+        model = new FakeModel()
+          ..url = 'http://localhost:31337/widgets'
+          ..attributes = {'test': 1};
+
         HipsterSync.
           call('create', model).
           then((rec) {
@@ -64,10 +65,10 @@ hipster_sync_tests() {
         return completer.future;
       });
 
-      test("it can PUT on top of existing records", (){
-        var model = new FakeModel();
-        model.url = 'http://localhost:31337/widgets/${model_id}';
-        model.attributes = {'test': 42};
+      test("HTTP PUT: can update existing records", (){
+        model
+          ..url = 'http://localhost:31337/widgets/${model_id}'
+          ..attributes = {'test': 42};
 
         HipsterSync.
           call('update', model).
@@ -76,6 +77,23 @@ hipster_sync_tests() {
               expect(response, containsPair('test', 42));
             })
           );
+      });
+
+      group("HTTP DELETE:", (){
+        setUp((){
+          model.url = 'http://localhost:31337/widgets/${model_id}';
+          return HipsterSync.call('delete', model);
+        });
+
+        test("can remove the record from the store", (){
+          HipsterSync.
+            call('read', model).
+            catchError(
+              expectAsync1((error) {
+                expect(error, "That ain't gonna work: 404");
+              })
+            );
+        });
       });
     });
   });

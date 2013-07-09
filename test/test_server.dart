@@ -34,6 +34,7 @@ handleWidgets(req) {
   if (req.method == 'POST') return createWidget(req);
   if (req.method == 'GET' && id != null) return readWidget(id, req);
   if (req.method == 'PUT' && id != null) return updateWidget(id, req);
+  if (req.method == 'DELETE' && id != null) return deleteWidget(id, req);
 
   notFoundResponse(req);
 }
@@ -90,9 +91,21 @@ updateWidget(id, req) {
     });
 }
 
+deleteWidget(id, req) {
+  if (!db.containsKey(id)) return notFoundResponse(req);
+
+  db.remove(id);
+
+  HttpResponse res = req.response;
+  res.statusCode = HttpStatus.NO_CONTENT;
+  res.close();
+}
 
 notFoundResponse(req) {
   HttpResponse res = req.response;
+
+  print('[404] ${req.method} ${req.uri.path}');
+
   res.statusCode = HttpStatus.NOT_FOUND;
   res.close();
 }

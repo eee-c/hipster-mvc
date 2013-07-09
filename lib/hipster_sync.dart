@@ -54,7 +54,7 @@ class HipsterSync {
 
         if (req.status > 299) {
           completer.
-            completeException("That ain't gonna work: ${req.status}");
+            completeError("That ain't gonna work: ${req.status}");
         }
         else {
           completer.complete(parseJson(req.responseText));
