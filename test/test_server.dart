@@ -31,6 +31,7 @@ handleWidgets(req) {
   var id_path = r.firstMatch(req.uri.path),
       id = (id_path == null) ? null : id_path[1];
 
+  if (req.method == 'GET' && id == null) return readWidgetCollection(req);
   if (req.method == 'POST') return createWidget(req);
   if (req.method == 'GET' && id != null) return readWidget(id, req);
   if (req.method == 'PUT' && id != null) return updateWidget(id, req);
@@ -56,6 +57,15 @@ createWidget(req) {
     res.write(JSON.stringify(widget));
     res.close();
   });
+}
+
+readWidgetCollection(req) {
+  HttpResponse res = req.response;
+  res.headers.contentType =
+    new ContentType("application", "json", charset: "utf-8");
+
+  res.write(JSON.stringify(db.values.toList()));
+  res.close();
 }
 
 readWidget(id, req) {
@@ -92,9 +102,13 @@ updateWidget(id, req) {
 }
 
 deleteWidget(id, req) {
-  if (!db.containsKey(id)) return notFoundResponse(req);
-
-  db.remove(id);
+  if (id == 'ALL') {
+    db.clear();
+  }
+  else {
+    if (!db.containsKey(id)) return notFoundResponse(req);
+    db.remove(id);
+  }
 
   HttpResponse res = req.response;
   res.statusCode = HttpStatus.NO_CONTENT;
