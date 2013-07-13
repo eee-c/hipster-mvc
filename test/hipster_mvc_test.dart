@@ -3,6 +3,8 @@ library hipster_mvc_test;
 import 'package:unittest/unittest.dart';
 import 'dart:html';
 import 'dart:async';
+import 'dart:json' as JSON;
+import 'package:js/js.dart' as js;
 
 import 'package:hipster_mvc/hipster_events.dart';
 import 'package:hipster_mvc/hipster_sync.dart';

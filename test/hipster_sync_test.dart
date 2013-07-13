@@ -7,11 +7,11 @@ class FakeModel {
 
 hipster_sync_tests() {
   group("Hipster Sync", (){
-    tearDown(() {
-      var model = new FakeModel()
-        ..url = 'http://localhost:31337/widgets/ALL';
-      HipsterSync.call('delete', model);
-    });
+    // tearDown(() {
+    //   var model = new FakeModel()
+    //     ..url = 'http://localhost:31337/widgets/ALL';
+    //   HipsterSync.call('delete', model);
+    // });
 
     test("can parse regular JSON", (){
       expect(
@@ -26,16 +26,45 @@ hipster_sync_tests() {
       );
     });
 
-    group("HTTP get", (){
+    solo_group("HTTP get", (){
+      var server;
+      setUp(() {
+        server = js.context.sinon.fakeServer.create();
+        // server.respondWith(
+        //   '{ "id": 12, "comment": "Hey there" }'
+        // );
+        var cb = new js.Callback.once((req) {
+          req.respond(200, [], '{ "id": 12, "comment": "Hey there" }');
+        });
+
+        server.respondWith(cb);
+      });
+
       test("it can parse responses", (){
-        var model = new FakeModel();
-        HipsterSync.
-          call('get', model).
-          then(
-            expectAsync1((response) {
-              expect(response, {'foo': 1});
-            })
-          );
+        var request = new HttpRequest();
+
+        request.
+          onLoad.
+          listen(expectAsync1((event) {
+            HttpRequest req = event.target;
+
+            var response = JSON.parse(req.responseText);
+            expect(response, containsPair('comment', 'Hey there'));
+            }));
+        request.open('GET', '/test');
+
+
+
+        // var model = new FakeModel()
+        //   ..url = '/test';
+        // HipsterSync.
+        //   call('get', model).
+        //   then(
+        //     expectAsync1((response) {
+        //       expect(response, containsPair('comment', 'Hey there'));
+        //     })
+        //   );
+        server.respond();
       });
     });
 
