@@ -7,4 +7,5 @@ dependencies:
   unittest: any
   dirty: any
   uuid: any
-  js: any
+  browser: any
+  hop: any

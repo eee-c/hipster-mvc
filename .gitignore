@@ -5,3 +5,4 @@ packages
 pubspec.lock
 test/test.db
 test.db
+test_server.pid
