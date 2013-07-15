@@ -16,7 +16,7 @@ hipster_sync_tests() {
     test("can parse regular JSON", (){
       expect(
         HipsterSync.parseJson('{"foo": 1}'),
-        {'foo': 2}
+        {'foo': 1}
       );
     });
     test("can parse empty responses", (){

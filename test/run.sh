@@ -22,8 +22,6 @@ echo "starting test server"
 ./bin/hop test_server-stop
 ./bin/hop test_database-delete
 
-exit 0
-
 #####
 # Type Analysis
 
