@@ -6,20 +6,23 @@ set -e
 # Unit Tests
 
 echo "starting test server"
-dart test/test_server.dart &
-server_pid=$!
+./bin/hop test_server-start
 
-echo "content_shell --dump-render-tree test/index.html"
-results=`content_shell --dump-render-tree test/index.html 2>&1`
+# echo "content_shell --dump-render-tree test/index.html"
+# results=`content_shell --dump-render-tree test/index.html 2>&1`
 
-echo "$results" | grep CONSOLE
+# echo "$results" | grep CONSOLE
 
-echo "$results" | grep 'unittest-suite-success' >/dev/null
+# echo "$results" | grep 'unittest-suite-success' >/dev/null
 
-echo "$results" | grep -v 'Exception: Some tests failed.' >/dev/null
+# echo "$results" | grep -v 'Exception: Some tests failed.' >/dev/null
 
-kill $server_pid
-rm -f test.db test/test.db
+./bin/hop tests-run
+
+./bin/hop test_server-stop
+./bin/hop test_database-delete
+
+exit 0
 
 #####
 # Type Analysis

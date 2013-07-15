@@ -5,9 +5,30 @@ import 'dart:async';
 import 'dart:io';
 
 void main() {
+  addAsyncTask('tests-run', _runTests);
   addAsyncTask('test_server-start', _startTestServer);
   addAsyncTask('test_server-stop', _stopTestServer);
+  addSyncTask('test_database-delete', _deleteTestDb);
   runHop();
+}
+
+
+Future<bool> _runTests(TaskContext content) {
+  var tests = new Completer();
+
+  Process.
+    run('content_shell', ['--dump-render-tree', 'test/index.html']).
+    then((res) {
+      var lines = res.stdout.split("\n");
+      print(
+        lines.
+          where((line)=> line.contains('CONSOLE')).
+          join("\n")
+      );
+      tests.complete(res.stdout.contains('unittest-suite-success'));
+    });
+
+  return tests.future;
 }
 
 Future<bool> _startTestServer(TaskContext content) {
@@ -36,4 +57,12 @@ Future<bool> _stopTestServer(TaskContext context) {
     then((_)=> killed.complete(true));
 
   return killed.future;
+}
+
+bool _deleteTestDb(TaskContext context) {
+  var db = new File('test/test.db');
+  if (!db.existsSync()) return true;
+
+  db.deleteSync();
+  return true;
 }
