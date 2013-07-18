@@ -5,12 +5,22 @@ class FakeModel {
   HashMap attributes;
 }
 
+class HttpRequestX {
+  static Future respondWith(response) {
+    return HttpRequest.request(
+      'http://localhost:31337/stub',
+      method: 'post',
+      sendData: response
+    );
+  }
+}
+
 hipster_sync_tests() {
   group("Hipster Sync", (){
     tearDown(() {
       var model = new FakeModel()
         ..url = 'http://localhost:31337/widgets/ALL';
-      HipsterSync.call('delete', model);
+      return HipsterSync.call('delete', model);
     });
 
     test("can parse regular JSON", (){
@@ -27,13 +37,17 @@ hipster_sync_tests() {
     });
 
     group("HTTP get", (){
+      setUp((){
+        return HttpRequestX.respondWith('{"foo": 42}');
+      });
+
       test("it can parse responses", (){
         var model = new FakeModel();
         HipsterSync.
           call('get', model).
           then(
             expectAsync1((response) {
-              expect(response, {'foo': 1});
+              expect(response, {'foo': 42});
             })
           );
       });
@@ -136,4 +150,5 @@ hipster_sync_tests() {
       });
     });
   });
+
 }

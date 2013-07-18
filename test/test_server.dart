@@ -7,6 +7,8 @@ import 'package:uuid/uuid.dart';
 Uuid uuid = new Uuid();
 Dirty db = new Dirty('test.db');
 
+var stub;
+
 main() {
   var port = Platform.environment['PORT'] == null ?
     31337 : int.parse(Platform.environment['PORT']);
@@ -14,15 +16,39 @@ main() {
   HttpServer.bind('127.0.0.1', port).then((app) {
 
     app.listen((HttpRequest req) {
+      log(req);
+
+      if (stub != null) {
+        req.response.write(stub);
+        req.response.close();
+        stub = null;
+        return;
+      }
+
+      if (req.uri.path.startsWith('/stub')) {
+        addStub(req);
+        return;
+      }
+
       if (req.uri.path.startsWith('/widgets')) {
         handleWidgets(req);
         return;
       }
 
-      defaultResponse(req);
+      notFoundResponse(req);
     });
 
     print('Server started on port: ${port}');
+  });
+}
+
+addStub(req) {
+  req.toList().then((list) {
+    stub = new String.fromCharCodes(list[0]);
+
+    HttpResponse res = req.response;
+    res.statusCode = HttpStatus.NO_CONTENT;
+    res.close();
   });
 }
 
@@ -117,9 +143,6 @@ deleteWidget(id, req) {
 
 notFoundResponse(req) {
   HttpResponse res = req.response;
-
-  print('[404] ${req.method} ${req.uri.path}');
-
   res.statusCode = HttpStatus.NOT_FOUND;
   res.close();
 }
@@ -127,4 +150,11 @@ notFoundResponse(req) {
 defaultResponse(req) {
   req.response.write(JSON.stringify({'foo': 1}));
   req.response.close();
+}
+
+log(req) {
+  req.response.done.then((res){
+    var now = new DateTime.now();
+    print('[${now}] "${req.method} ${req.uri.path}" ${res.statusCode}');
+  });
 }
