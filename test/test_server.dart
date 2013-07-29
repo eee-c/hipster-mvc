@@ -18,6 +18,17 @@ main() {
     app.listen((HttpRequest req) {
       log(req);
 
+      HttpResponse res = req.response;
+      res.headers
+        ..add('Access-Control-Allow-Origin', 'null')
+        ..add('Access-Control-Allow-Headers', 'Content-Type')
+        ..add('Access-Control-Allow-Methods', 'DELETE,PUT');
+
+      if (req.method == 'OPTIONS') {
+        handleOptions(req);
+        return;
+      }
+
       if (stub != null) {
         req.response.write(stub);
         req.response.close();
@@ -138,6 +149,12 @@ deleteWidget(id, req) {
 
   HttpResponse res = req.response;
   res.statusCode = HttpStatus.NO_CONTENT;
+  res.close();
+}
+
+handleOptions(req) {
+  HttpResponse res = req.response;
+  res.statusCode = HttpStatus.OK;
   res.close();
 }
 
