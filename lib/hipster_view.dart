@@ -30,7 +30,7 @@ class HipsterView {
       , event_type = event_selector.substring(0,index)
       , selector = event_selector.substring(index+1);
 
-    parent.on[event_type].add((event) {
+    parent.on[event_type].listen((event) {
       var found = false;
       parent.queryAll(selector).forEach((el) {
         if (el == event.target) found = true;
