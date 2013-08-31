@@ -1,27 +1,13 @@
 part of hipster_mvc_test;
 
 class FakeModel {
-  String url = 'http://localhost:31337/test';
+  String url = Kruk.widgets_url;
   HashMap attributes;
-}
-
-class HttpRequestX {
-  static Future respondWith(response) {
-    return HttpRequest.request(
-      'http://localhost:31337/stub',
-      method: 'post',
-      sendData: response
-    );
-  }
 }
 
 hipster_sync_tests() {
   group("Hipster Sync", (){
-    tearDown(() {
-      var model = new FakeModel()
-        ..url = 'http://localhost:31337/widgets/ALL';
-      return HipsterSync.call('delete', model);
-    });
+    tearDown(()=> Kruk.deleteAll());
 
     test("can parse regular JSON", (){
       expect(
@@ -37,17 +23,24 @@ hipster_sync_tests() {
     });
 
     group("HTTP get", (){
-      setUp((){
-        return HttpRequestX.respondWith('{"foo": 42}');
+      var id;
+      setUp(() {
+        return Kruk.
+          create('{"foo": 42}').
+          then((res) {
+            id = JSON.parse(res.responseText)['id'];
+          });
       });
 
       test("it can parse responses", (){
-        var model = new FakeModel();
+        var model = new FakeModel()
+          ..url = '${Kruk.widgets_url}/${id}';
+
         HipsterSync.
           call('get', model).
           then(
             expectAsync1((response) {
-              expect(response, {'foo': 42});
+              expect(response, containsPair('foo', 42));
             })
           );
       });
@@ -55,9 +48,8 @@ hipster_sync_tests() {
 
     group("HTTP post", (){
       test("it can POST new records", (){
-        var model = new FakeModel();
-        model.url = 'http://localhost:31337/widgets';
-        model.attributes = {'test': 42};
+        var model = new FakeModel()
+          ..attributes = {'test': 42};
 
         HipsterSync.
           call('create', model).
@@ -76,7 +68,6 @@ hipster_sync_tests() {
         var completer = new Completer();
 
         model = new FakeModel()
-          ..url = 'http://localhost:31337/widgets'
           ..attributes = {'test': 1};
 
         HipsterSync.
@@ -124,11 +115,9 @@ hipster_sync_tests() {
     group('(w/ multiple pre-existing records)', (){
       setUp((){
         var model1 = new FakeModel()
-          ..url = 'http://localhost:31337/widgets'
           ..attributes = {'test': 1};
 
         var model2 = new FakeModel()
-          ..url = 'http://localhost:31337/widgets'
           ..attributes = {'test': 2};
 
         return Future.wait([
@@ -138,8 +127,7 @@ hipster_sync_tests() {
       });
 
       test("can retrieve a collection of records", (){
-        var collection = new FakeModel()
-          ..url = 'http://localhost:31337/widgets';
+        var collection = new FakeModel();
 
         HipsterSync.call('read', collection).
           then(

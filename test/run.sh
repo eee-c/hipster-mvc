@@ -1,25 +1,30 @@
 #!/bin/bash
 
-set -e
-
 #####
 # Unit Tests
 
+# Start the test server
 echo "starting test server"
-dart test/test_server.dart &
-server_pid=$!
+packages/plummbur_kruk/start.sh
 
 echo "content_shell --dump-render-tree test/index.html"
 results=`content_shell --dump-render-tree test/index.html 2>&1`
 
-echo "$results" | grep CONSOLE
+echo "$results"
 
-echo "$results" | grep 'unittest-suite-success' >/dev/null
+# Stop the server
+packages/plummbur_kruk/stop.sh
 
-echo "$results" | grep -v 'Exception: Some tests failed.' >/dev/null
+# check to see if DumpRenderTree tests
+# fails, since it always returns 0
+if [[ "$results" == *"Some tests failed"* ]]; then
+    exit 1
+fi
 
-kill $server_pid
-rm -f test.db test/test.db
+if [[ "$results" == *"Exception: "* ]]; then
+    exit 1
+fi
+
 
 #####
 # Type Analysis
