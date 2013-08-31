@@ -1,7 +1,7 @@
 library hipster_sync;
 
 import 'dart:html';
-import 'dart:json' as JSON;
+import 'package:json/json.dart' as JSON;
 import 'dart:async';
 
 //typedef Future<HashMap> SyncCallback(String method, dynamic model);

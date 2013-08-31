@@ -4,7 +4,7 @@ import 'package:unittest/unittest.dart';
 import 'package:plummbur_kruk/kruk.dart';
 import 'dart:html';
 import 'dart:async';
-import 'dart:json' as JSON;
+import 'package:json/json.dart' as JSON;
 
 
 import 'package:hipster_mvc/hipster_events.dart';
