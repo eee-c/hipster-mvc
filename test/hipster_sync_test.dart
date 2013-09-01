@@ -28,7 +28,7 @@ hipster_sync_tests() {
         return Kruk.
           create('{"foo": 42}').
           then((res) {
-            id = JSON.parse(res.responseText)['id'];
+            id = JSON.decode(res.responseText)['id'];
           });
       });
 

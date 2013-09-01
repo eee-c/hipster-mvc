@@ -1,8 +1,8 @@
 library hipster_sync;
 
 import 'dart:html';
-import 'package:json/json.dart' as JSON;
 import 'dart:async';
+import 'dart:convert';
 
 //typedef Future<HashMap> SyncCallback(String method, dynamic model);
 
@@ -69,7 +69,7 @@ class HipsterSync {
     // POST and PUT HTTP request bodies if necessary
     if (verb == 'post' || verb == 'put') {
       request.setRequestHeader('Content-type', 'application/json');
-      request.send(JSON.stringify(model.attributes));
+      request.send(JSON.encode(model.attributes));
     }
     else {
       request.send();
@@ -80,6 +80,6 @@ class HipsterSync {
 
   static parseJson(json) {
     if (json.isEmpty) return {};
-    return JSON.parse(json);
+    return JSON.decode(json);
   }
 }

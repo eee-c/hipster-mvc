@@ -7,4 +7,3 @@ dependencies:
   browser: ">=0.6.19 <0.6.20"
   unittest: ">=0.6.19 <0.6.20"
   plummbur_kruk: ">=0.0.4 <0.0.5"
-  json: ">=0.6.9 <0.6.10"
