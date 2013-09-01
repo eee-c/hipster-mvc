@@ -38,8 +38,8 @@ abstract class HipsterCollection implements Iterable {
     return ret;
   }
 
-  fetch() {
-    HipsterSync.
+  Future<Map> fetch() {
+    return HipsterSync.
       call('read', this).
       then((list) {
         list.forEach((attrs) {
@@ -49,19 +49,16 @@ abstract class HipsterCollection implements Iterable {
       });
   }
 
-  create(attrs) {
-    Future after_save = _buildModel(attrs).save();
-
-    after_save.
-      then((saved_model) {
-        this.add(saved_model);
-      });
-
-    after_save.
-      catchError((e) {
-        print("Exception handled: ${e}");
-        return true;
-      });
+  Future<dynamic> create(attrs) {
+    return _buildModel(attrs).
+      save()
+      ..then((saved_model) {
+          this.add(saved_model);
+        })
+      ..catchError((e) {
+          print("Exception handled: ${e}");
+          return true;
+        });
   }
 
   add(model) {
