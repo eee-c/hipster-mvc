@@ -37,11 +37,6 @@ if [[ $? != 0 ]]; then
   exit 1
 fi
 
-dartanalyzer lib/hipster_events.dart
-if [[ $? != 0 ]]; then
-  exit 1
-fi
-
 dartanalyzer lib/hipster_history.dart
 if [[ $? != 0 ]]; then
   exit 1

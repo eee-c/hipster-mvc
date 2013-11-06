@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'hipster_collection.dart';
 import 'hipster_sync.dart';
-import 'hipster_events.dart';
 
 /** HipsterModel encapsulates individual records in your backend datastore. At
  * its most concise, a model need only to implement the [urlRoot] method:
@@ -16,12 +15,7 @@ class HipsterModel {
   /** The internal representation of the record. */
   Map attributes;
 
-  /**
-   * An [Events] object for the model. Any internal changes to the model will
-   * broadcast events from this object.  See [ModelEvents] for the complete
-   * list of events supported.
-   */
-  ModelEvents on = new ModelEvents();
+  StreamController _onSave, _onDelete;
 
   /** If the model is part of a collection, it will be stored here. */
   HipsterCollection collection;
@@ -32,7 +26,12 @@ class HipsterModel {
    */
   HipsterModel([this.attributes]) {
     if (attributes == null) attributes = {};
+    _onSave = new StreamController.broadcast();
+    _onDelete = new StreamController.broadcast();
   }
+
+  Stream get onSave => _onSave.stream;
+  Stream get onDelete => _onDelete.stream;
 
   // TODO: better hashing function (delimited keys and values?)
   static String hash() {
@@ -89,12 +88,12 @@ class HipsterModel {
   Future<HipsterModel> save() {
     Completer completer = new Completer();
     String operation = isSaved() ? 'update' : 'create';
-    Future after_call = HipsterSync.call(operation, this);
+    Future after_call = HipsterSync.send(operation, this);
 
     after_call.
       then((attrs) {
         this.attributes = attrs;
-        on.load.dispatch(new ModelEvent('save', this));
+        _onSave.add(this);
         completer.complete(this);
       });
 
@@ -119,39 +118,12 @@ class HipsterModel {
     Completer completer = new Completer();
 
     HipsterSync.
-      call('delete', this).
+      send('delete', this).
       then((attrs) {
-        var event = new ModelEvent('delete', this);
-        on.delete.dispatch(event);
-
+        _onDelete.add(this);
         completer.complete(this);
       });
 
     return completer.future;
   }
-
 }
-
-class ModelEvent extends HipsterEvent {
-  var type, model;
-  ModelEvent(this.type, this.model);
-}
-
-class ModelEvents extends HipsterEvents {
-  var load_list = new ModelEventListenerList();
-  var save_list = new ModelEventListenerList();
-  var delete_list = new ModelEventListenerList();
-
-  get load => load_list;
-  get save => save_list;
-  get delete => delete_list;
-
-  operator [](String type) {
-    if (type == 'load') return this.load;
-    if (type == 'save') return this.save;
-    if (type == 'delete') return this.delete;
-    return new ModelEventListenerList();
-  }
-}
-
-class ModelEventListenerList extends HipsterEventListenerList {}

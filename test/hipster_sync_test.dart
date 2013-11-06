@@ -37,7 +37,7 @@ hipster_sync_tests() {
           ..url = '${Kruk.widgets_url}/${id}';
 
         HipsterSync.
-          call('get', model).
+          send('get', model).
           then(
             expectAsync1((response) {
               expect(response, containsPair('foo', 42));
@@ -52,7 +52,7 @@ hipster_sync_tests() {
           ..attributes = {'test': 42};
 
         HipsterSync.
-          call('create', model).
+          send('create', model).
           then(
             expectAsync1((response) {
               expect(response, containsPair('test', 42));
@@ -71,7 +71,7 @@ hipster_sync_tests() {
           ..attributes = {'test': 1};
 
         HipsterSync.
-          call('create', model).
+          send('create', model).
           then((rec) {
             model_id = rec['id'];
             completer.complete();
@@ -86,7 +86,7 @@ hipster_sync_tests() {
           ..attributes = {'test': 42};
 
         HipsterSync.
-          call('update', model).
+          send('update', model).
           then(
             expectAsync1((response) {
               expect(response, containsPair('test', 42));
@@ -97,12 +97,12 @@ hipster_sync_tests() {
       group("HTTP DELETE:", (){
         setUp((){
           model.url = 'http://localhost:31337/widgets/${model_id}';
-          return HipsterSync.call('delete', model);
+          return HipsterSync.send('delete', model);
         });
 
         test("can remove the record from the store", (){
           HipsterSync.
-            call('read', model).
+            send('read', model).
             catchError(
               expectAsync1((error) {
                 expect(error, "That ain't gonna work: 404");
@@ -121,15 +121,15 @@ hipster_sync_tests() {
           ..attributes = {'test': 2};
 
         return Future.wait([
-          HipsterSync.call('create', model1),
-          HipsterSync.call('create', model2)
+          HipsterSync.send('create', model1),
+          HipsterSync.send('create', model2)
         ]);
       });
 
       test("can retrieve a collection of records", (){
         var collection = new FakeModel();
 
-        HipsterSync.call('read', collection).
+        HipsterSync.send('read', collection).
           then(
             expectAsync1((response) {
               expect(response.length, 2);

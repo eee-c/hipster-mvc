@@ -22,7 +22,7 @@ class HipsterSync {
 
   // static method for HipsterModel and HipsterCollection to invoke -- will
   // forward the call to the appropriate behavior (injected or default)
-  static Future<dynamic> call(method, model) {
+  static Future<dynamic> send(method, model) {
     if (_injected_sync == null) {
       return _defaultSync(method, model);
     }
