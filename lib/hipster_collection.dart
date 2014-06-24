@@ -2,6 +2,7 @@ library hipster_collection;
 
 import 'dart:async';
 import 'dart:collection';
+import 'dart:mirrors';
 
 import 'hipster_model.dart';
 import 'hipster_sync.dart';
@@ -11,8 +12,12 @@ abstract class HipsterCollection extends IterableBase {
   List<HipsterModel> models = [];
   Map<String,Map> data;
 
-  HipsterModel modelMaker(attrs);
-  String get url;
+  Type modelClass;
+  HipsterModel modelMaker(attrs) {
+    ClassMirror modelMirror = reflectClass(modelClass);
+    return modelMirror.newInstance(const Symbol(''), [attrs]).reflectee;
+  }
+  String url;
 
   HipsterCollection(){
     _onLoad = new StreamController.broadcast();
